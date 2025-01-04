@@ -10,33 +10,33 @@ import { HeaderSection } from "../shared/header-section";
 const pricingFaqData = [
   {
     id: "item-1",
-    question: "What is the cost of the free plan?",
+    question: "What is Creatify_AI?",
     answer:
-      "Our free plan is completely free, with no monthly or annual charges. It's a great way to get started and explore our basic features.",
+      "Creatify_AI is an AI-powered content generator designed to help you create high-quality articles, social media posts, product descriptions, emails, and more. It’s your ultimate tool for fast and efficient content creation.",
   },
   {
     id: "item-2",
-    question: "How much does the Basic Monthly plan cost?",
+    question: "Can I customize the tone and style of the content?",
     answer:
-      "The Basic Monthly plan is priced at $15 per month. It provides access to our core features and is billed on a monthly basis.",
+      "Yes, Creatify_AI allows you to tailor the tone, style, and format of your content to match your brand’s voice. From professional to casual or witty, you’re in control!",
   },
   {
     id: "item-3",
-    question: "What is the price of the Pro Monthly plan?",
+    question: "Is Creatify_AI suitable for non-writers or beginners?",
     answer:
-      "The Pro Monthly plan is available for $25 per month. It offers advanced features and is billed on a monthly basis for added flexibility.",
+      "Absolutely! Creatify_AI is user-friendly and perfect for beginners. Whether you're a business owner, student, or anyone in need of great content, the app simplifies the process for you.",
   },
   {
     id: "item-4",
-    question: "Do you offer any annual subscription plans?",
+    question: "Does Creatify_AI support multiple languages?",
     answer:
-      "Yes, we offer annual subscription plans for even more savings. The Basic Annual plan is $144 per year, and the Pro Annual plan is $300 per year.",
+      "Yes, Creatify_AI supports multiple languages, enabling you to create content in various languages to connect with your global audience.",
   },
   {
     id: "item-5",
-    question: "Is there a trial period for the paid plans?",
+    question: "Is my data safe with Creatify_AI?",
     answer:
-      "We offer a 14-day free trial for both the Pro Monthly and Pro Annual plans. It's a great way to experience all the features before committing to a paid subscription.",
+      "Yes, we take data privacy and security seriously. All content and user data are protected with industry-standard encryption to ensure your information is secure.",
   },
 ];
 

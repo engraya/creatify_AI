@@ -11,10 +11,11 @@ import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DocsSearch } from "@/components/docs/search";
 import { ModalContext } from "@/components/modals/providers";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import {ModeToggle} from "@/components/layout/mode-toggle";
+
 
 interface NavBarProps {
   scroll?: boolean;
@@ -81,7 +82,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
           {documentation ? (
             <div className="hidden flex-1 items-center space-x-4 sm:justify-end lg:flex">
               <div className="hidden lg:flex lg:grow-0">
-                <DocsSearch />
+              
               </div>
               <div className="flex lg:hidden">
                 <Icons.search className="size-6 text-muted-foreground" />
@@ -127,6 +128,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
           ) : (
             <Skeleton className="hidden h-9 w-28 rounded-full lg:flex" />
           )}
+          {/* <ModeToggle /> */}
         </div>
       </MaxWidthWrapper>
     </header>

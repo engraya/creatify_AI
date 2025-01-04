@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
   ogImage: `${site_url}/_static/og.jpg`,
   links: {
     portfolio: "https://engrahmadaya.vercel.app/",
-    github: "https://github.com/engraya",
+    github: "https://github.com/engraya/creatify_AI",
   },
   mailSupport: "engrahmadaya@gmail.com",
 };

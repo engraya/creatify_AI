@@ -3,7 +3,6 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
 import { UserSubscriptionPlan } from "@/types";
-
 import { SubscriptionPlan } from "@/types/index";
 import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";

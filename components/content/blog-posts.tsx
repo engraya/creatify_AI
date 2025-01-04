@@ -11,13 +11,7 @@ export function BlogPosts({
 }) {
   return (
     <main className="space-y-8">
-      <BlogCard data={posts[0]} horizontale priority />
-
-      <div className="grid gap-8 md:grid-cols-2 md:gap-x-6 md:gap-y-10 xl:grid-cols-3">
-        {posts.slice(1).map((post, idx) => (
-          <BlogCard data={post} key={post._id} priority={idx <= 2} />
-        ))}
-      </div>
+      At Creatify_AI, we believe that great content should be accessible to everyone. Built by a team of passionate technologists and creatives, our mission is to simplify content creation with cutting-edge AI. Whether you're a business, freelancer, or content creator, Creatify_AI is here to amplify your voice and save you time
     </main>
   );
 }

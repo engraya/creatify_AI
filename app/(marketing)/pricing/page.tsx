@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import { getCurrentUser } from "@/lib/session";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { constructMetadata } from "@/lib/utils";
 import { ComparePlans } from "@/components/pricing/compare-plans";
 import { PricingCards } from "@/components/pricing/pricing-cards";
-import { PricingFaq } from "@/components/pricing/pricing-faq";
+
 
 export const metadata = constructMetadata({
   title: "Pricing – SaaS Starter",
@@ -51,7 +50,6 @@ export default async function PricingPage() {
       <PricingCards userId={user?.id} subscriptionPlan={subscriptionPlan} />
       <hr className="container" />
       <ComparePlans />
-      <PricingFaq />
     </div>
   );
 }
