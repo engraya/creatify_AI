@@ -5,12 +5,10 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useSession } from "next-auth/react";
-
 import { docsConfig } from "@/config/docs";
 import { marketingConfig } from "@/config/marketing";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { DocsSidebarNav } from "@/components/docs/sidebar-nav";
 import { Icons } from "@/components/shared/icons";
 
 import { ModeToggle } from "./mode-toggle";
@@ -123,7 +121,7 @@ export function NavMobile() {
 
         {documentation ? (
           <div className="mt-8 block md:hidden">
-            <DocsSidebarNav setOpen={setOpen} />
+            <h1>Hello Mobile</h1>
           </div>
         ) : null}
 

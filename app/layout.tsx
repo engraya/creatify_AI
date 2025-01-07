@@ -1,14 +1,19 @@
 import "@/styles/globals.css";
-
 import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-
 import { cn, constructMetadata } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@/components/analytics";
 import ModalProvider from "@/components/modals/providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -18,6 +23,7 @@ export const metadata = constructMetadata();
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
+    <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
@@ -29,8 +35,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontGeist.variable,
         )}
       >
-        <SessionProvider>
-          <ThemeProvider
+        <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -41,8 +46,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Toaster richColors closeButton />
             <TailwindIndicator />
           </ThemeProvider>
-        </SessionProvider>
-      </body>
+         </body>
     </html>
+    </ClerkProvider>
   );
 }

@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/shared/icons"
@@ -11,7 +10,7 @@ export const metadata = {
   description: "Create an account to get started.",
 }
 
-export default function RegisterPage() {
+export default function SignUpPage() {
   return (
     <div className="container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link

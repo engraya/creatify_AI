@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import Link from "next/link";
-
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/components/forms/user-auth-form";
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
   description: "Login to your account",
 };
 
-export default function LoginPage() {
+export default function SignInPage() {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link

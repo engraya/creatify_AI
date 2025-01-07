@@ -78,16 +78,8 @@ export function NavBar({ scroll = false }: NavBarProps) {
         </div>
 
         <div className="flex items-center space-x-3">
-          {/* right header for docs */}
-          {documentation ? (
             <div className="hidden flex-1 items-center space-x-4 sm:justify-end lg:flex">
-              <div className="hidden lg:flex lg:grow-0">
-              
-              </div>
-              <div className="flex lg:hidden">
-                <Icons.search className="size-6 text-muted-foreground" />
-              </div>
-              <div className="flex space-x-4">
+               <div className="flex space-x-4">
                 <Link
                   href={siteConfig.links.github}
                   target="_blank"
@@ -98,11 +90,10 @@ export function NavBar({ scroll = false }: NavBarProps) {
                 </Link>
               </div>
             </div>
-          ) : null}
+   
 
-          {session ? (
             <Link
-              href={session.user.role === "ADMIN" ? "/admin" : "/dashboard"}
+              href={"/dashboard"}
               className="hidden md:block"
             >
               <Button
@@ -114,7 +105,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
                 <span>Dashboard</span>
               </Button>
             </Link>
-          ) : status === "unauthenticated" ? (
+  
             <Button
               className="hidden gap-2 px-5 md:flex"
               variant="default"
@@ -125,10 +116,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
               <span>Sign In</span>
               <Icons.arrowRight className="size-4" />
             </Button>
-          ) : (
-            <Skeleton className="hidden h-9 w-28 rounded-full lg:flex" />
-          )}
-          {/* <ModeToggle /> */}
+
         </div>
       </MaxWidthWrapper>
     </header>
