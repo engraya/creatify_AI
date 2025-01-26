@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/components/forms/user-auth-form";
 import { Icons } from "@/components/shared/icons";
-
+import { SignIn } from '@clerk/nextjs'
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to your account",
@@ -36,17 +36,7 @@ export default function SignInPage() {
             Enter your email to sign in to your account
           </p>
         </div>
-        <Suspense>
-          <UserAuthForm />
-        </Suspense>
-        <p className="px-8 text-center text-sm text-muted-foreground">
-          <Link
-            href="/register"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Don&apos;t have an account? Sign Up
-          </Link>
-        </p>
+        <SignIn />
       </div>
     </div>
   );

@@ -3,18 +3,19 @@
 import { useContext } from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { docsConfig } from "@/config/docs";
 import { marketingConfig } from "@/config/marketing";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ModalContext } from "@/components/modals/providers";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import {ModeToggle} from "@/components/layout/mode-toggle";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import Image from "next/image";
+import { logoIcon } from "@/public/_static";
+
 
 
 interface NavBarProps {
@@ -24,7 +25,6 @@ interface NavBarProps {
 
 export function NavBar({ scroll = false }: NavBarProps) {
   const scrolled = useScroll(50);
-  const { data: session, status } = useSession();
   const { setShowSignInModal } = useContext(ModalContext);
 
   const selectedLayout = useSelectedLayoutSegment();
@@ -49,9 +49,12 @@ export function NavBar({ scroll = false }: NavBarProps) {
       >
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-1.5">
-            <Icons.logo />
-            <span className="font-urban text-xl font-bold">
-              {siteConfig.name}
+           <Image src={logoIcon} height={40} width={40} alt="logo"/>
+            <span className="font-urban text-xl font-extrabold">
+            <h1
+              className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500">
+                {siteConfig.name}
+            </h1>
             </span>
           </Link>
 
@@ -79,6 +82,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
 
         <div className="flex items-center space-x-3">
             <div className="hidden flex-1 items-center space-x-4 sm:justify-end lg:flex">
+              
                <div className="flex space-x-4">
                 <Link
                   href={siteConfig.links.github}
@@ -91,7 +95,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
               </div>
             </div>
    
-
+            <SignedIn>
             <Link
               href={"/dashboard"}
               className="hidden md:block"
@@ -105,18 +109,23 @@ export function NavBar({ scroll = false }: NavBarProps) {
                 <span>Dashboard</span>
               </Button>
             </Link>
+            </SignedIn>
   
+            <SignedOut>
             <Button
               className="hidden gap-2 px-5 md:flex"
               variant="default"
               size="sm"
               rounded="full"
-              onClick={() => setShowSignInModal(true)}
             >
-              <span>Sign In</span>
+              <SignInButton />
               <Icons.arrowRight className="size-4" />
             </Button>
-
+            </SignedOut>
+    
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
         </div>
       </MaxWidthWrapper>
     </header>

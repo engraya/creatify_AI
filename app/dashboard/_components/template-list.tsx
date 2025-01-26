@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { contentTemplates } from "@/lib/content-templates";
+import { contentTemplates } from "@/lib/content-template";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-
+import TemplateCard from "./TemplateCard";
 export const TemplateList = ({ searchInput }: { searchInput: string }) => {
   const [templateList, setTemplateList] = useState(contentTemplates);
 
@@ -40,15 +40,9 @@ export const TemplateList = ({ searchInput }: { searchInput: string }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-5 mt-5">
       {templateList.map((template) => (
-        <div key={template.slug}>
-          <Link
-            href={`/dashboard/${template.slug}`}
-            className="bg-white w-full rounded-lg h-[200px] py-4 px-4 text-center flex flex-col justify-center"
-          >
-            <template.icon className="h-12 w-12 mx-auto"></template.icon>
-            <h2 className="font-semibold mt-5">{template.name}</h2>
-          </Link>
-        </div>
+        <Link href={`/dashboard/${template.slug}`}>
+        <TemplateCard key={template.slug} name={template.name} icon={template.icon} desc={template.desc}/>
+        </Link>
       ))}
     </div>
   );

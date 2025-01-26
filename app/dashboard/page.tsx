@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SearchDashboard } from "./_components/search-dashboard";
+import { SearchDashboard } from "./_components/serach-dashboard";
 import { TemplateList } from "./_components/template-list";
 
 const Dashboard = () => {

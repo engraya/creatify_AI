@@ -1,11 +1,12 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import AIChart from "./ai-chart";
+import { currentUser } from "@clerk/nextjs/server";
 
 export const AIUsage = async () => {
-  const { userId } = auth();
+  const user = await currentUser();
+  const userId  = user?.id
 
   if (!userId) {
     redirect("/");

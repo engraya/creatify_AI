@@ -2,8 +2,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/shared/icons"
-import { UserAuthForm } from "@/components/forms/user-auth-form"
-import { Suspense } from "react"
+import { SignUp } from '@clerk/nextjs'
 
 export const metadata = {
   title: "Create an account",
@@ -34,26 +33,7 @@ export default function SignUpPage() {
               Enter your email below to create your account
             </p>
           </div>
-          <Suspense>
-            <UserAuthForm type="register" />
-          </Suspense>
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            By clicking continue, you agree to our{" "}
-            <Link
-              href="/terms"
-              className="hover:text-brand underline underline-offset-4"
-            >
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/privacy"
-              className="hover:text-brand underline underline-offset-4"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </p>
+          <SignUp />
         </div>
       </div>
     </div>

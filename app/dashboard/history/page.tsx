@@ -9,11 +9,13 @@ import {
     TableRow,
   } from "@/components/ui/table";
   import { db } from "@/lib/db";
-  import { auth } from "@clerk/nextjs/server";
   import { format } from "date-fns";
+  import { currentUser } from "@clerk/nextjs/server";
   
   const History = async () => {
-    const { userId } = auth();
+
+    const user = await currentUser();
+    const userId  = user?.id
   
     const userHistory = await db.aIOutput.findMany({
       where: {

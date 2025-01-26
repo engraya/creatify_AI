@@ -1,7 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CategoryProps } from "./categories";
-import { cn } from "@/lib/utils";
 import qs from "query-string";
 
 export const CategoryItem = ({ name, value }: CategoryProps) => {
@@ -29,13 +28,8 @@ export const CategoryItem = ({ name, value }: CategoryProps) => {
   };
 
   return (
-    <button
-      onClick={handleOnClick}
-      className={cn(
-        "py-2 px-4 text-sm border rounded-full flex items-center cursor-pointer"
-      )}
-    >
+      <button onClick={handleOnClick} className="px-6 py-2 bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 text-gray-100 font-bold rounded-lg transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
       {name}
-    </button>
+      </button>
   );
 };

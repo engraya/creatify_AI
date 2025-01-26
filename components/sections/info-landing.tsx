@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { InfoLdg } from "@/types";
-
+import { subImage } from "@/public/_static/landing";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
@@ -49,10 +49,10 @@ export default function InfoLanding({
         >
           <div className="aspect-video">
             <Image
-              className="size-full object-cover object-center"
-              src={data.image}
+              className="size-full object-center"
+              src={subImage}
               alt={data.title}
-              width={1000}
+              width={500}
               height={500}
               priority={true}
             />
