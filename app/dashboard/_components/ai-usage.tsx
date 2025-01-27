@@ -36,7 +36,7 @@ export const AIUsage = async () => {
   availableCredit = userCredit ? Number(userCredit?.totalCredit) : 10000;
 
   return (
-    <div className="bg-white">
+    <div className="">
       <AIChart availableCredit={availableCredit} totalUsage={totalUsage} />
     </div>
   );
