@@ -26,17 +26,19 @@ import {
     return (
       <div className="mx-5 py-2">
         <div className="mt-5 py-6 px-4 bg-white rounded">
-          <h2 className="font-medium">Output History</h2>
+          <h1 className="bg-clip-text flex justify-center items-center text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-2xl font-black">
+          Recent Contents History
+          </h1>
         </div>
         <div className="mt-5 py-6 px-4 bg-white rounded">
           <Table>
-            <TableCaption>A list of your ai output history.</TableCaption>
+            <TableCaption>List of your content output history.</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>Template</TableHead>
                 <TableHead className="w-[250px]">Title</TableHead>
                 <TableHead>Description</TableHead>
-                <TableHead className="text-right">Created At</TableHead>
+                <TableHead className="text-right">Timestamps</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
