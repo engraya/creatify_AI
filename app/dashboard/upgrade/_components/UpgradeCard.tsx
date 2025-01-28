@@ -23,7 +23,7 @@ function UpgradeCard( { handleOnClick} : any) {
                 <polygon points="0 11 2 9 7 14 18 3 20 5 7 18" />
             </svg>
             </div>
-            <p className="text-xs">All Template Access</p>
+            <p className="text-xs">Access All Templates</p>
         </div>
         <div className="flex-1 inline-flex items-center mb-3">
             <div className="bg-green-300 mr-3 p-1 rounded-full">
@@ -31,7 +31,7 @@ function UpgradeCard( { handleOnClick} : any) {
                 <polygon points="0 11 2 9 7 14 18 3 20 5 7 18" />
             </svg>
             </div>
-            <p className="text-xs">Retain All History</p>
+            <p className="text-xs">Retain Recent Contents</p>
         </div>
         </div>
         </div>

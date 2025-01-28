@@ -10,6 +10,8 @@ import { Editor } from "./_components/editor";
 import { chatSession } from "@/lib/gemini-ai";
 import axios from "axios";
 import Link from "next/link";
+import { createContentAction } from "@/actions/save-content-action";
+
 interface templateSlugProps {
   templateSlug: string;
 }
@@ -34,17 +36,24 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
       const finalAIPrompt = JSON.stringify(dataSet) + ", " + selectedPrompt;
 
       const result = await chatSession.sendMessage(finalAIPrompt);
+      console.log("Response from GEMINI", result)
       setAIOutput(result.response.text());
 
-      const response = await axios.post("/api/", {
+      // const response = await axios.post("/api/", {
+      //   title: dataSet.title,
+      //   description: result.response.text(),
+      //   templateUsed: selectedTemplate?.name,
+      // });
+
+      const response = await createContentAction({
         title: dataSet.title,
         description: result.response.text(),
         templateUsed: selectedTemplate?.name,
       });
       console.log("response: " + response);
-      setisLoading(false);
     } catch (error) {
       console.log("Generating Content Error",error);
+      setisLoading(false);
     }
   };
   const onSubmit = async (formData: FormData) => {
@@ -89,7 +98,7 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
         </Button>
       </form>
       <div className="my-10">
-        <Editor value={isLoading ? "Generating..." : aiOutput} />
+        <Editor value={isLoading ? "Generating Content..." : aiOutput} />
       </div>
     </div>
   );

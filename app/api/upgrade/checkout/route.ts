@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       customer: stripeCustomer?.stripeCustomerId,
       line_items,
       mode: "payment",
-      success_url: `http://localhost:3000/dashboard/`,
+      success_url: `http://localhost:3000/dashboard/usage`,
       cancel_url: `http://localhost:3000/`,
       metadata: {
         userId: userId,
