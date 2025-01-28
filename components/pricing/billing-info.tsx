@@ -48,6 +48,7 @@ export function BillingInfo({ userSubscriptionPlan }: BillingInfoProps) {
         ) : null}
 
         {isPaid && stripeCustomerId ? (
+          // @ts-ignore
           <CustomerPortalButton userStripeId={stripeCustomerId} />
         ) : (
           <Link href="/pricing" className={cn(buttonVariants())}>
