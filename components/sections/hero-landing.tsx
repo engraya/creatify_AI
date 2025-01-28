@@ -24,7 +24,7 @@ export default async function HeroLanding() {
 
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
         Effortlessly Create Stunning Content with{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 font-extrabold">
+          <span className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text font-extrabold text-transparent">
             Creatify_AI
           </span>
         </h1>
@@ -33,7 +33,7 @@ export default async function HeroLanding() {
           className="max-w-2xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
         >
-          Say goodbye to writer's block and hello to creativity. Creatify_AI empowers businesses, marketers, and creators with high-quality, SEO-friendly content in seconds
+          Say goodbye to writer&lsquo;s block and hello to creativity. Creatify_AI empowers businesses, marketers, and creators with high-quality, SEO-friendly content in seconds
         </p>
 
         <div

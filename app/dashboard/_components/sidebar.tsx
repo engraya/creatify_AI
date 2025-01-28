@@ -43,30 +43,30 @@ export const Sidebar = ({ showSideBar }: Props) => {
   console.log("path", path);
   return (
     <div
-    className={`flex flex-col justify-between fixed top-0 left-0 z-50 h-full overflow-y-auto transition-transform ${
+    className={`fixed left-0 top-0 z-50 flex h-full flex-col justify-between overflow-y-auto transition-transform ${
       showSideBar ? "translate-x-0 " : "-translate-x-full lg:translate-x-0"
     }`}
   >
-    <div className="p-5 bg-white h-[800px] flex flex-col">
+    <div className="flex h-[800px] flex-col bg-white p-5">
       <Link href="/">
-      <div className="flex flex-row gap-2 cursor-pointer">
-       <Image src={logoIcon} height={40} width={40} alt="logo" className="flex justify-center items-center"/>
-         <span className="font-urban flex justify-center items-center text-gray-900 text-xl font-bold">
+      <div className="flex cursor-pointer flex-row gap-2">
+       <Image src={logoIcon} height={40} width={40} alt="logo" className="flex items-center justify-center"/>
+         <span className="flex items-center justify-center font-urban text-xl font-bold text-gray-900">
          <h1
-              className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500">
+              className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text text-xl font-extrabold text-transparent">
                 {siteConfig.name}
             </h1>
           </span>
       </div>
       </Link>
   
-      <div className="mt-10 h-max flex flex-col justify-between">
+      <div className="mt-10 flex h-max flex-col justify-between">
         {menuList.map((menu) => (
           <Link
             href={menu.path}
             key={menu.name}
             className={cn(
-              "flex gap-2 mb-2 p-3 hover:bg-slate-400 whitespace-nowrap font-bold hover:text-white cursor-pointer rounded-lg items-center",
+              "mb-2 flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-lg p-3 font-bold hover:bg-slate-400 hover:text-white",
               path === menu.path && "bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 text-white"
             )}
           >

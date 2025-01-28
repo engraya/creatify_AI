@@ -14,7 +14,7 @@ export const Editor = ({ value }: { value: string }) => {
     <ReactQuill
       theme="snow"
       value={value}
-      className="h-[350px] pb-10 bg-white whitespace-pre-wrap"
+      className="h-[350px] whitespace-pre-wrap bg-white pb-10"
     ></ReactQuill>
   );
 };

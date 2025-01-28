@@ -52,7 +52,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
            <Image src={logoIcon} height={40} width={40} alt="logo"/>
             <span className="font-urban text-xl font-extrabold">
             <h1
-              className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500">
+              className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text text-xl font-extrabold text-transparent">
                 {siteConfig.name}
             </h1>
             </span>

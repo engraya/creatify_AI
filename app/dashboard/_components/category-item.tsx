@@ -29,18 +29,18 @@ export const CategoryItem = ({ name, value }: CategoryProps) => {
   return (
     <button
       onClick={handleOnClick}
-      className={`relative px-2 py-1 rounded-lg overflow-hidden group border-2 ${
+      className={`group relative overflow-hidden rounded-lg border-2 px-2 py-1 ${
         isSelected ? "border-emerald-300 text-gray-100" : "border-transparent text-gray-700"
       } ${
         isSelected
-          ? "bg-gradient-to-r from-green-400 to-blue-100 group-hover:bg-transparent text-white "
+          ? "bg-gradient-to-r from-green-400 to-blue-100 text-white group-hover:bg-transparent "
           : "bg-white hover:bg-emerald-500"
       } transition-all duration-300`}
     >
       <span
-        className={`absolute inset-0 transform ${
+        className={`absolute inset-0${
           isSelected ? "-translate-x-full" : "translate-x-0"
-        } group-hover:translate-x-0 transition duration-300`}
+        } transition duration-300 group-hover:translate-x-0`}
       ></span>
       <span
         className={`relative z-10 text-sm ${

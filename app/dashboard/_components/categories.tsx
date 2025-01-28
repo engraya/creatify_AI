@@ -8,7 +8,7 @@ export interface CategoryProps {
 
 export const Categories = ({ items }: { items: CategoryProps[] }) => {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex flex-wrap gap-2">
       {items.map((category) => (
         <CategoryItem
           key={category.name}

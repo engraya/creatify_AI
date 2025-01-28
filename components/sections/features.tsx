@@ -35,7 +35,7 @@ export default function Features() {
                     <div className="relative flex size-12 rounded-2xl border border-border shadow-sm *:relative *:m-auto *:size-6">
                       <Icon />
                     </div>
-                    <div className="relative flex items-center justify-center font-extrabold text-center text-gray-900 dark:text-slate-200">
+                    <div className="relative flex items-center justify-center text-center font-extrabold text-gray-900 dark:text-slate-200">
                     {feature.title}
                     </div>
                     </div>

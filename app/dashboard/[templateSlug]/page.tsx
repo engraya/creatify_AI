@@ -62,18 +62,18 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
   return (
     <div className="mx-5 py-2">
       <Link href="/dashboard">
-      <div className="p-2 mt-3 w-10 rounded-lg bg-slate-300 cursor-pointer">
-      <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <div className="mt-3 w-10 cursor-pointer rounded-lg bg-slate-300 p-2">
+      <svg className="size-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
             <path fillRule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
         </svg>
       </div>
       </Link>
-      <div className="mt-5 py-6 px-4 bg-white rounded">
+      <div className="mt-5 rounded bg-white px-4 py-6">
         <h2 className="font-medium">{selectedTemplate?.name}</h2>
       </div>
       <form action={onSubmit}>
-        <div className="flex flex-col gap-4 p-5 mt-3 bg-white">
+        <div className="mt-3 flex flex-col gap-4 bg-white p-5">
           {selectedTemplate?.form?.map((form) => (
             <div key={selectedTemplate.id}>
               <label>{form.label}</label>

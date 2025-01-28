@@ -58,7 +58,7 @@ export default function AIChart({
                     <tspan
                       x={viewBox.cx}
                       y={(viewBox.cy || 0) - 16}
-                      className="fill-foreground font-bold text-sm"
+                      className="fill-foreground text-sm font-bold"
                     >
                       {`${totalUsage} / ${availableCredit}`}
                     </tspan>

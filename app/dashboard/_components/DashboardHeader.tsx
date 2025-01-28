@@ -12,14 +12,14 @@ function DashboardHeader({ setShowSideBar, showSideBar }: Props) {
 
 
   return (
-    <nav className="w-full sm:hidden lg:w-[calc(100%-13.5rem)] fixed top-0 z-40 p-2 bg-gray-200">
+    <nav className="fixed top-0 z-40 w-full bg-gray-200 p-2 sm:hidden lg:w-[calc(100%-13.5rem)]">
     <div className="flex flex-wrap items-center justify-between">
     <Link href="/">
-      <div className="flex flex-row gap-2 cursor-pointer">
-       <Image src={logoIcon} height={40} width={40} alt="logo" className="flex justify-center items-center"/>
-         <span className="font-urban flex justify-center items-center text-gray-900 text-xl font-bold">
+      <div className="flex cursor-pointer flex-row gap-2">
+       <Image src={logoIcon} height={40} width={40} alt="logo" className="flex items-center justify-center"/>
+         <span className="flex items-center justify-center font-urban text-xl font-bold text-gray-900">
          <h1
-              className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500">
+              className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text text-xl font-extrabold text-transparent">
                 {siteConfig.name}
             </h1>
           </span>
@@ -27,9 +27,9 @@ function DashboardHeader({ setShowSideBar, showSideBar }: Props) {
       </Link>
       <div className="flex items-center gap-4">
         {/* Sidebar Toggle for Mobile */}
-    <div className="sm:hidden ustify-center items-center gap-2 inline-flex">
-    <div onClick={() => setShowSideBar(!showSideBar)} className="h-10 p-2 bg-[#151929] rounded justify-center cursor-pointer items-center gap-2 inline-flex overflow-hidden">
-        <div className="w-6 h-6 relative overflow-hidden">
+    <div className="ustify-center inline-flex items-center gap-2 sm:hidden">
+    <div onClick={() => setShowSideBar(!showSideBar)} className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded bg-[#151929] p-2">
+        <div className="relative size-6 overflow-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M21 12H3" stroke="#C1C5E0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M21 6H3" stroke="#C1C5E0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

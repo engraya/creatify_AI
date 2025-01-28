@@ -19,12 +19,12 @@ const DashboardLayout = ({
     <div
       className={`${
         showSideBar &&
-        "absolute bg-opacity-30 w-full h-full z-40"
+        "bg-opacity/30 absolute z-40 size-full"
       }`}
       onClick={() => setShowSideBar(false)}
         ></div>
       <DashboardHeader setShowSideBar={setShowSideBar} showSideBar={showSideBar}/>
-      <div className="md:ml-64 mt-12 md:mt-0 bg-gray-50 h-fit pb-5">{children}</div>
+      <div className="mt-12 h-fit bg-gray-50 pb-5 md:ml-64 md:mt-0">{children}</div>
     </div>
     </div>
   );
