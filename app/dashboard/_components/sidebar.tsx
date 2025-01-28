@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { Icons } from "@/components/shared/icons";
+import { usage } from "@/public/_static/dashboard";
 import { logoIcon } from "@/public/_static";
 const menuList = [
   {
@@ -20,17 +20,33 @@ const menuList = [
     path: "/dashboard/history",
   },
   {
+    name: "Usage",
+    icon: usage,
+    path: "/dashboard/usage",
+  },
+  {
     name: "Upgrade",
     icon: upgrade,
     path: "/dashboard/upgrade",
   },
 ];
 
-export const Sidebar = () => {
+type Props = {
+  showSideBar: boolean;
+  setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+
+export const Sidebar = ({ showSideBar }: Props) => {
   const path = usePathname();
 
   console.log("path", path);
   return (
+    <div
+    className={`flex flex-col justify-between fixed top-0 left-0 z-50 h-full overflow-y-auto transition-transform ${
+      showSideBar ? "translate-x-0 " : "-translate-x-full lg:translate-x-0"
+    }`}
+  >
     <div className="p-5 bg-white h-[800px] flex flex-col">
       <Link href="/">
       <div className="flex flex-row gap-2 cursor-pointer">
@@ -60,5 +76,7 @@ export const Sidebar = () => {
         ))}
       </div>
     </div>
+    </div>
+
   );
 };

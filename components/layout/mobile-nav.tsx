@@ -6,7 +6,6 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { docsConfig } from "@/config/docs";
 import { marketingConfig } from "@/config/marketing";
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/shared/icons";
 import { ModeToggle } from "./mode-toggle";
@@ -67,15 +66,6 @@ export function NavMobile() {
             </li>
           ))}
             <>
-                <li className="py-3">
-                  <Link
-                    href="/admin"
-                    onClick={() => setOpen(false)}
-                    className="flex w-full font-medium capitalize"
-                  >
-                    Admin
-                  </Link>
-                </li>
               <li className="py-3">
                 <Link
                   href="/dashboard"
@@ -109,15 +99,8 @@ export function NavMobile() {
             </>
 
         </ul>
-
-        {documentation ? (
-          <div className="mt-8 block md:hidden">
-            <h1>Hello Mobile</h1>
-          </div>
-        ) : null}
-
         <div className="mt-5 flex items-center justify-end space-x-4">
-          <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
+          <Link href="#" target="_blank" rel="noreferrer">
             <Icons.gitHub className="size-6" />
             <span className="sr-only">GitHub</span>
           </Link>

@@ -7,9 +7,10 @@ import twitter from "./twitter_5968830.png"
 import tiktok from "./tiktok_2504942.png"
 import instagram from "./instagram_1409946.png"
 import youtube from "./youtube_1384060.png"
-
+import usage from "./usage.png"
 export {
     create,
+    usage,
     facebook,
     youtube,
     instagram,

@@ -24,7 +24,7 @@ export default async function HeroLanding() {
 
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
         Effortlessly Create Stunning Content with{" "}
-          <span className="text-gradient_indigo-purple font-extrabold">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 font-extrabold">
             Creatify_AI
           </span>
         </h1>

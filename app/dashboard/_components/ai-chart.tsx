@@ -37,7 +37,7 @@ export default function AIChart({
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square w-full max-w-[250px]"
+      className="mx-auto aspect-square w-full max-w-[500px]"
     >
       <RadialBarChart
         data={chartData}

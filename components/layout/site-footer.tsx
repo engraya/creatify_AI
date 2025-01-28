@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { footerLinks, siteConfig } from "@/config/site";
+import { footerLinks } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/layout/mode-toggle";
 import { NewsletterForm } from "../forms/newsletter-form";
@@ -42,7 +42,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <p className="text-left text-sm text-muted-foreground">
             Built by{" "}
             <Link
-              href={siteConfig.links.portfolio}
+              href="#"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
@@ -51,7 +51,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             </Link>
             . Hosted on{" "}
             <Link
-              href="https://vercel.com"
+              href="#"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
@@ -62,7 +62,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
           <div className="flex items-center gap-3">
             <Link
-              href={siteConfig.links.github}
+              href="#"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"

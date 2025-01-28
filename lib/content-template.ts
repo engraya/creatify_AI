@@ -3,6 +3,7 @@ import { facebook, twitter, instagram, youtube, tiktok, linkedin } from "@/publi
 
 export const contentTemplates = [
 {
+  id : 1,
   name: "Facebook Post Description",
   desc: "An AI tool that generates Facebook post descriptions based on your input",
   category: "Facebook",
@@ -24,7 +25,8 @@ export const contentTemplates = [
     },
   ],
 },
-{
+{ 
+  id : 2,
   name: "Youtube Video Idea",
   desc: "An AI tool that generate Youtube Video Idea based on given information",
   category: "Youtube",
@@ -46,7 +48,8 @@ export const contentTemplates = [
     },
   ],
 },
-{
+{ 
+  id : 3,
   name: "Instagram Hashtags",
   desc: "An AI tool that generate Instagram hashtags based on your post niche and outline information",
   category: "Instagram",
@@ -69,6 +72,7 @@ export const contentTemplates = [
   ],
 },
 {
+  id : 4,
   name: "Tiktok Hashtags",
   desc: "An AI tool that generate Tiktok topic idea based on your post niche and outline information",
   category: "Tiktok",
@@ -91,6 +95,7 @@ export const contentTemplates = [
   ],
 },
 {
+  id : 5,
   name: "Linkedin Post",
   desc: "An AI tool that generate Linkedin Post idea based on your post niche and outline information",
   category: "Linkedin",
@@ -113,6 +118,7 @@ export const contentTemplates = [
   ],
 },
 {
+  id : 6,
   name: "Tweet",
   desc: "An AI tool that generate Linkedin Post idea based on your post niche and outline information",
   category: "Tweet",

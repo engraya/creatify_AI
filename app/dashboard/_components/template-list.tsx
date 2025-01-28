@@ -40,8 +40,8 @@ export const TemplateList = ({ searchInput }: { searchInput: string }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-5 mt-5">
       {templateList.map((template) => (
-        <Link href={`/dashboard/${template.slug}`}>
-        <TemplateCard key={template.slug} name={template.name} icon={template.icon} desc={template.desc}/>
+        <Link href={`/dashboard/${template.slug}`} key={template.id}>
+        <TemplateCard key={template.id} name={template.name} icon={template.icon} desc={template.desc}/>
         </Link>
       ))}
     </div>
