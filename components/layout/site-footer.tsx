@@ -62,7 +62,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
           <div className="flex items-center gap-3">
             <Link
-              href="#"
+              href="https://github.com/engraya/creatify_AI"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
