@@ -8,7 +8,6 @@ import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { ModalContext } from "@/components/modals/providers";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
@@ -111,11 +110,9 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                 Go to dashboard
               </Link>
             ) : (
-              <BillingFormButton
-                year={isYearly}
-                offer={offer}
-                subscriptionPlan={subscriptionPlan}
-              />
+              <button>
+                Button
+              </button>
             )
           ) : (
             <Button
