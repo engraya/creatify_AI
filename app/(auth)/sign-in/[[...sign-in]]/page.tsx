@@ -29,7 +29,7 @@ export default function SignInPage() {
       </Link>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
-          <Image src={logoIcon} height={40} width={40} alt="logo" className="flex items-center justify-center mx-auto "/>
+          <Image src={logoIcon} height={40} width={40} alt="logo" className="flex  justify-center items-center mx-auto "/>
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
