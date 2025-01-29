@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { SearchDashboard } from "./_components/serach-dashboard";
 import { TemplateList } from "./_components/template-list";
+import { Suspense } from "react";
+
 
 const Dashboard = () => {
   const [searchInput, setSearchInput] = useState<string>();
@@ -10,7 +12,9 @@ const Dashboard = () => {
   return (
     <div>
       <SearchDashboard onSearchInput={setSearchInput} />
-      <TemplateList searchInput={searchInput as string} />
+      <Suspense>
+        <TemplateList searchInput={searchInput as string} />
+      </Suspense>
     </div>
   );
 };
