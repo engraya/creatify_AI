@@ -36,18 +36,12 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
       const finalAIPrompt = JSON.stringify(dataSet) + ", " + selectedPrompt;
 
       const result = await chatSession.sendMessage(finalAIPrompt);
+      setAIOutput(result?.response?.text());
       console.log("Response from GEMINI", result)
-      setAIOutput(result.response.text());
-
-      // const response = await axios.post("/api/", {
-      //   title: dataSet.title,
-      //   description: result.response.text(),
-      //   templateUsed: selectedTemplate?.name,
-      // });
 
       const response = await createContentAction({
         title: dataSet.title,
-        description: result.response.text(),
+        description: result?.response?.text(),
         templateUsed: selectedTemplate?.name,
       });
       console.log("response: " + response);
@@ -98,7 +92,7 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
         </Button>
       </form>
       <div className="my-10">
-        <Editor value={isLoading ? "Generating Content..." : aiOutput} />
+        <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..." : aiOutput} />
       </div>
     </div>
   );
