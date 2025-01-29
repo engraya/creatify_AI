@@ -10,12 +10,10 @@ const Dashboard = () => {
   const [searchInput, setSearchInput] = useState<string>();
 
   return (
-    <>
+    <Suspense fallback={<div>Loading templates...</div>}>
       <SearchDashboard onSearchInput={setSearchInput} />
-      <Suspense fallback={<div>Loading templates...</div>}>
-        <TemplateList searchInput={searchInput as string} />
-      </Suspense>
-    </>
+      <TemplateList searchInput={searchInput as string} />
+    </Suspense>
   );
 };
 
