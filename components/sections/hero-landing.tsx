@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default async function HeroLanding() {
   return (
@@ -53,6 +53,19 @@ export default async function HeroLanding() {
               <Icons.arrowRight className="size-4" />
             </Link>
           </SignedIn>
+          <SignedOut>
+            <Link
+              href="/sign-in"
+              prefetch={true}
+              className={cn(
+                buttonVariants({ size: "lg", rounded: "full" }),
+                "gap-2",
+              )}
+            >
+              <span>Get Started</span>
+              <Icons.arrowRight className="size-4" />
+            </Link>
+          </SignedOut>
 
           <Link
             href={siteConfig.links.github}
