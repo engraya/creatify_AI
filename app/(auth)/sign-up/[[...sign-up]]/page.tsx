@@ -25,7 +25,7 @@ export default function SignUpPage() {
       <div className="hidden h-full bg-muted lg:block" />
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center mt-4 ">
+          <div className="flex flex-col space-y-2 text-center">
             <div  className="mx-auto mt-6 flex items-center justify-center" >
             <Image src={logoIcon} height={40} width={40} alt="logo"/>
             </div>
