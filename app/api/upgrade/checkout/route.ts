@@ -66,8 +66,8 @@ export async function POST(req: Request) {
       customer: stripeCustomer?.stripeCustomerId,
       line_items,
       mode: "payment",
-      success_url: `http://localhost:3000/dashboard/usage`,
-      cancel_url: `http://localhost:3000/`,
+      success_url: `https://creatify-ai-pro.vercel.app/dashboard/usage`,
+      cancel_url: `https://creatify-ai-pro.vercel.app/`,
       metadata: {
         userId: userId,
       },
