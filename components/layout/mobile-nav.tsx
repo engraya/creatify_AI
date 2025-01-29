@@ -9,7 +9,7 @@ import { marketingConfig } from "@/config/marketing";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/shared/icons";
 import { ModeToggle } from "./mode-toggle";
-
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 export function NavMobile() {
   const [open, setOpen] = useState(false);
   const selectedLayout = useSelectedLayoutSegment();
@@ -65,8 +65,9 @@ export function NavMobile() {
               </Link>
             </li>
           ))}
-            <>
-              <li className="py-3">
+            <>\
+            <SignedIn>
+            <li className="py-3">
                 <Link
                   href="/dashboard"
                   onClick={() => setOpen(false)}
@@ -75,11 +76,14 @@ export function NavMobile() {
                   Dashboard
                 </Link>
               </li>
+            </SignedIn>
+   
             </>
             <>
-              <li className="py-3">
+            <SignedOut>
+            <li className="py-3">
                 <Link
-                  href="/login"
+                  href="/sign-in"
                   onClick={() => setOpen(false)}
                   className="flex w-full font-medium capitalize"
                 >
@@ -89,18 +93,23 @@ export function NavMobile() {
 
               <li className="py-3">
                 <Link
-                  href="/register"
+                  href="/sign-up"
                   onClick={() => setOpen(false)}
                   className="flex w-full font-medium capitalize"
                 >
                   Sign up
                 </Link>
               </li>
+            </SignedOut>
+    
             </>
 
         </ul>
         <div className="mt-5 flex items-center justify-end space-x-4">
-          <Link href="#" target="_blank" rel="noreferrer">
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          <Link href="https://github.com/engraya/creatify_AI" target="_blank" rel="noreferrer">
             <Icons.gitHub className="size-6" />
             <span className="sr-only">GitHub</span>
           </Link>
