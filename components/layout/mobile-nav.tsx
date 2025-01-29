@@ -65,7 +65,7 @@ export function NavMobile() {
               </Link>
             </li>
           ))}
-            <>\
+            <>
             <SignedIn>
             <li className="py-3">
                 <Link
@@ -90,7 +90,6 @@ export function NavMobile() {
                   Login
                 </Link>
               </li>
-
               <li className="py-3">
                 <Link
                   href="/sign-up"
