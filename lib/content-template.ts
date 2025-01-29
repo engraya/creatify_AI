@@ -9,7 +9,7 @@ export const contentTemplates = [
   category: "Facebook",
   icon: facebook,
   aiPrompt:
-    "Give me Facebook post description ideas based on the provided outline and title, and return the result in Rich Text Editor format.",
+    "Give me Facebook post description ideas based on the provided outline and title, and return the result in good text format with bulletins where necessary",
   slug: "facebook-description",
   form: [
     {
@@ -32,7 +32,7 @@ export const contentTemplates = [
   category: "Youtube",
   icon: youtube,
   aiPrompt:
-    "Give me youtube video idea on given video niche & outline topic and give me result in Rich Text Editor format",
+    "Give me youtube video idea on given video niche & outline topic and give me result in in good text format with bulletins where necessary",
   slug: "generate-youtube-video-idea",
   form: [
     {
@@ -55,7 +55,7 @@ export const contentTemplates = [
   category: "Instagram",
   icon: instagram,
   aiPrompt:
-    "Give me some good examples of instagram hashtags on given niche & outline topic and give me result in Rich Text Editor format",
+    "Give me some good examples of instagram hashtags on given niche & outline topic and give me result in good text format with bulletins where necessary",
   slug: "generate-instagram-hashtags",
   form: [
     {
@@ -78,7 +78,7 @@ export const contentTemplates = [
   category: "Tiktok",
   icon: tiktok,
   aiPrompt:
-    "Give me some good examples of instagram hashtags on given niche & outline topic and give me result in Rich Text Editor format",
+    "Give me some good examples of instagram hashtags on given niche & outline topic and give me result in in good text format with bulletins where necessary",
   slug: "generate-tiktok-hashtags",
   form: [
     {
@@ -101,7 +101,7 @@ export const contentTemplates = [
   category: "Linkedin",
   icon: linkedin,
   aiPrompt:
-    "Give me some good examples of Linkedin Post idea on given niche & outline topic and give me result in Rich Text Editor format",
+    "Give me some good examples of Linkedin Post idea on given niche & outline topic and give me result in good text format with bulletins where necessary",
   slug: "generate-likedin-post",
   form: [
     {

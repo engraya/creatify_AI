@@ -87,12 +87,15 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
           {isLoading ? (
             <Loader className="animate-spin"></Loader>
           ) : (
-            "Generate Content"
+            "Generate"
           )}
         </Button>
       </form>
       <div className="my-10">
-        <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..." : aiOutput} />
+        <div>
+        {isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your recent content to see the result!" : aiOutput}
+        </div>
+        {/* <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your recent content to see the result!" : aiOutput} /> */}
       </div>
     </div>
   );
