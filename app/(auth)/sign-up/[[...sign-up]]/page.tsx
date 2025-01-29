@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/shared/icons"
 import { SignUp } from '@clerk/nextjs'
-
+import Image from "next/image";
+import { logoIcon } from "@/public/_static";
 export const metadata = {
   title: "Create an account",
   description: "Create an account to get started.",
@@ -25,7 +26,7 @@ export default function SignUpPage() {
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <Icons.logo className="mx-auto size-6" />
+          <Image src={logoIcon} height={40} width={40} alt="logo"/>
             <h1 className="text-2xl font-semibold tracking-tight">
               Create an account
             </h1>
