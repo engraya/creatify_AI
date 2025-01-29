@@ -92,10 +92,7 @@ const TemplatePage = ({ params }: { params: templateSlugProps }) => {
         </Button>
       </form>
       <div className="my-10">
-        <div>
-        {isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your recent content to see the result!" : aiOutput}
-        </div>
-        {/* <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your recent content to see the result!" : aiOutput} /> */}
+        <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your Recent contents History to see the result!" : aiOutput} />
       </div>
     </div>
   );
