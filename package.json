@@ -7,10 +7,10 @@
     "url": "https://twitter.com/engraya"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && next build",
+    "dev": "node api.js && next dev",
+    "build": "node api.js && prisma generate && next build",
     "turbo": "next dev --turbo",
-    "start": "next start",
+    "start": "node api.js && next start",
     "lint": "next lint --fix",
     "preview": "next build && next start",
     "postinstall": "prisma generate",
