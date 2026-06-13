@@ -1,21 +1,18 @@
 import Stripe from "stripe";
 import { db } from "@/lib/db";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  // @ts-ignore
-  apiVersion: "2024-06-20",
+  apiVersion: "2024-06-20" as Stripe.LatestApiVersion,
 });
 
-export async function POST(req: Request) {
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
+export async function POST() {
   try {
-
     const user = await currentUser();
-
-    const userId  = user?.id
-
-    if (!userId) {
+    if (!user?.id) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -23,58 +20,42 @@ export async function POST(req: Request) {
       {
         quantity: 1,
         price_data: {
-          currency: "USD",
+          currency: "usd",
           product_data: {
-            name: "10,000 AI Credit",
-            description: "all $10 worth of credit",
+            name: "10,000 AI Credits",
+            description: "Top up 10,000 AI generation credits for $10",
           },
           unit_amount: 1000,
         },
       },
     ];
 
-    let purchase = await db.purchase.create({
-      data: {
-        userId: userId,
-        credit: 10000,
-      },
-    });
-
     let stripeCustomer = await db.stripeCustomer.findUnique({
-      where: {
-        userId: userId,
-      },
-      select: {
-        stripeCustomerId: true,
-      },
+      where: { userId: user.id },
+      select: { stripeCustomerId: true },
     });
 
     if (!stripeCustomer) {
       const customer = await stripe.customers.create({
-        email: user?.emailAddresses[0].emailAddress,
+        email: user.emailAddresses[0]?.emailAddress,
       });
-
-      let stripeCustomer = await db.stripeCustomer.create({
-        data: {
-          userId: userId,
-          stripeCustomerId: customer.id,
-        },
+      stripeCustomer = await db.stripeCustomer.create({
+        data: { userId: user.id, stripeCustomerId: customer.id },
       });
     }
 
     const session = await stripe.checkout.sessions.create({
-      customer: stripeCustomer?.stripeCustomerId,
+      customer: stripeCustomer.stripeCustomerId,
       line_items,
       mode: "payment",
-      success_url: `https://creatify-ai-pro.vercel.app/dashboard/usage`,
-      cancel_url: `https://creatify-ai-pro.vercel.app/`,
-      metadata: {
-        userId: userId,
-      },
+      success_url: `${APP_URL}/dashboard/usage`,
+      cancel_url: `${APP_URL}/dashboard/upgrade`,
+      metadata: { userId: user.id },
     });
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
+    console.error("Stripe checkout error:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

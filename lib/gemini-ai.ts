@@ -1,13 +1,9 @@
+import "server-only";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-// @ts-ignore
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
-
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const generationConfig = {
   temperature: 1,
@@ -17,7 +13,9 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-export const chatSession = model.startChat({
-  generationConfig: generationConfig,
-  history: [],
-});
+export function createChatSession() {
+  return model.startChat({
+    generationConfig,
+    history: [],
+  });
+}

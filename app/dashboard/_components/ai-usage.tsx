@@ -1,43 +1,25 @@
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import AIChart from "./ai-chart";
-import { currentUser } from "@clerk/nextjs/server";
 
 export const AIUsage = async () => {
   const user = await currentUser();
-  const userId  = user?.id
-
-  if (!userId) {
+  if (!user?.id) {
     redirect("/");
   }
 
-  let availableCredit;
-  let totalUsage: number = 0;
+  const [userAIOutputs, userCredit] = await Promise.all([
+    db.aIOutput.findMany({ where: { userId: user.id } }),
+    db.user.findUnique({ where: { userId: user.id } }),
+  ]);
 
-  const userAIOutputs = await db.aIOutput.findMany({
-    where: {
-      userId: userId as string,
-    },
-  });
-
-  if (userAIOutputs.length > 0) {
-    userAIOutputs.forEach((output) => {
-      totalUsage = totalUsage + Number(output.description?.length);
-    });
-
-    revalidatePath("/");
-  }
-
-  const userCredit = await db.user.findUnique({
-    where: { userId: userId as string },
-  });
-
-  availableCredit = userCredit ? Number(userCredit?.totalCredit) : 10000;
-
-  return (
-    <div className="">
-      <AIChart availableCredit={availableCredit} totalUsage={totalUsage} />
-    </div>
+  const totalUsage = userAIOutputs.reduce(
+    (sum, output) => sum + (output.description?.length ?? 0),
+    0
   );
-}
+
+  const availableCredit = userCredit ? Number(userCredit.totalCredit) : 10000;
+
+  return <AIChart availableCredit={availableCredit} totalUsage={totalUsage} />;
+};

@@ -1,82 +1,122 @@
 "use client";
 
-import { create, history, upgrade } from "@/public/_static/dashboard";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { usage } from "@/public/_static/dashboard";
 import { logoIcon } from "@/public/_static";
+import Image from "next/image";
+import { Sparkles, History, BarChart3, Zap } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
+
 const menuList = [
-  {
-    name: "Generate Content",
-    icon: create,
-    path: "/dashboard",
-  },
-  {
-    name: "Recent Contents",
-    icon: history,
-    path: "/dashboard/history",
-  },
-  {
-    name: "Usage",
-    icon: usage,
-    path: "/dashboard/usage",
-  },
-  {
-    name: "Upgrade",
-    icon: upgrade,
-    path: "/dashboard/upgrade",
-  },
+  { name: "Generate Content", icon: Sparkles, path: "/dashboard" },
+  { name: "Recent Contents", icon: History, path: "/dashboard/history" },
+  { name: "Usage", icon: BarChart3, path: "/dashboard/usage" },
+  { name: "Upgrade", icon: Zap, path: "/dashboard/upgrade" },
 ];
 
+type CreditData = { availableCredit: number; totalUsage: number };
+
 type Props = {
-  showSideBar: boolean;
-  setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
+  creditData: CreditData;
+  onNavClick?: () => void;
 };
 
-
-export const Sidebar = ({ showSideBar }: Props) => {
+export const Sidebar = ({ creditData, onNavClick }: Props) => {
   const path = usePathname();
+  const { availableCredit, totalUsage } = creditData;
+  const remaining = Math.max(availableCredit - totalUsage, 0);
+  const percentUsed = Math.min(
+    (totalUsage / Math.max(availableCredit, 1)) * 100,
+    100,
+  );
 
-  console.log("path", path);
   return (
-    <div
-    className={`fixed left-0 top-0 z-50 flex h-full flex-col justify-between overflow-y-auto transition-transform ${
-      showSideBar ? "translate-x-0 " : "-translate-x-full lg:translate-x-0"
-    }`}
-  >
-    <div className="flex h-[800px] flex-col bg-white p-5">
-      <Link href="/">
-      <div className="flex cursor-pointer flex-row gap-2">
-       <Image src={logoIcon} height={40} width={40} alt="logo" className="flex items-center justify-center"/>
-         <span className="flex items-center justify-center font-urban text-xl font-bold text-gray-900">
-         <h1
-              className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text text-xl font-extrabold text-transparent">
-                {siteConfig.name}
-            </h1>
+    <div className="flex h-screen w-64 shrink-0 flex-col bg-card border-r border-border">
+      {/* Logo */}
+      <div className="h-16 flex items-center gap-2.5 px-5 border-b border-border shrink-0">
+        <Link
+          href="/"
+          onClick={onNavClick}
+          className="flex items-center gap-2.5"
+        >
+          <Image
+            src={logoIcon}
+            height={32}
+            width={32}
+            alt="Creatify logo"
+            className="rounded-lg"
+          />
+          <span className="font-urban text-lg font-extrabold brand-gradient-text">
+            {siteConfig.name}
           </span>
+        </Link>
       </div>
-      </Link>
-  
-      <div className="mt-10 flex h-max flex-col justify-between">
-        {menuList.map((menu) => (
-          <Link
-            href={menu.path}
-            key={menu.name}
-            className={cn(
-              "mb-2 flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-lg p-3 font-bold hover:bg-slate-400 hover:text-white",
-              path === menu.path && "bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 text-white"
-            )}
-          >
-            <Image src={menu.icon} width={30} height={30} alt="menu-icon"/>
-            <h2 className="text-lg">{menu.name}</h2>
-          </Link>
-        ))}
-      </div>
-    </div>
-    </div>
 
+      {/* Nav */}
+      <nav className="flex-1 flex flex-col gap-1 px-3 py-4 overflow-y-auto">
+        {menuList.map((menu) => {
+          const Icon = menu.icon;
+          const isActive = path === menu.path;
+          return (
+            <Link
+              href={menu.path}
+              key={menu.name}
+              onClick={onNavClick}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-primary/10 text-primary font-semibold border border-primary/20"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+              )}
+            >
+              <Icon className="size-4 shrink-0" />
+              {menu.name}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Credit meter */}
+      <div className="px-4 py-3 border-t border-border">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-xs font-medium text-muted-foreground">
+            Credits
+          </span>
+          <span className="text-xs font-mono text-foreground">
+            {remaining.toLocaleString()} left
+          </span>
+        </div>
+        <div className="relative h-1.5 w-full rounded-full bg-muted overflow-hidden">
+          <div
+            className={cn(
+              "h-full rounded-full transition-all duration-500",
+              percentUsed > 80 ? "bg-warning" : "bg-primary",
+            )}
+            style={{ width: `${percentUsed}%` }}
+          />
+        </div>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          {totalUsage.toLocaleString()} / {availableCredit.toLocaleString()}{" "}
+          used
+        </p>
+        {percentUsed > 80 && (
+          <Link href="/dashboard/upgrade" onClick={onNavClick}>
+            <div className="mt-2 w-full text-xs h-7 rounded-lg border border-warning/50 text-warning hover:bg-warning/10 transition-colors px-2 flex items-center justify-center gap-1 cursor-pointer">
+              <Zap className="size-3" />
+              Upgrade
+            </div>
+          </Link>
+        )}
+      </div>
+
+      {/* User */}
+      <div className="px-4 py-3 border-t border-border flex items-center justify-between">
+        <UserButton />
+        <ThemeToggle />
+      </div>
+    </div>
   );
 };

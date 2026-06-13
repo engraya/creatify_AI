@@ -1,19 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { SearchDashboard } from "./_components/serach-dashboard";
 import { TemplateList } from "./_components/template-list";
-import { Suspense } from "react";
-
+import { TemplateGridSkeleton } from "./_components/template-grid-skeleton";
 
 const Dashboard = () => {
-  const [searchInput, setSearchInput] = useState<string>();
+  const [searchInput, setSearchInput] = useState<string | undefined>();
 
   return (
-    <Suspense fallback={<div>Loading templates...</div>}>
-      <SearchDashboard onSearchInput={setSearchInput} />
-      <TemplateList searchInput={searchInput as string} />
-    </Suspense>
+    <div>
+      <div className="px-5 pt-6 pb-2">
+        <h1 className="text-xl font-semibold text-foreground">
+          Content Templates
+        </h1>
+        <p className="text-sm text-muted-foreground mt-0.5">
+          Choose a template to generate social media content with AI
+        </p>
+      </div>
+
+      <Suspense fallback={<TemplateGridSkeleton />}>
+        <SearchDashboard onSearchInput={setSearchInput} />
+        <TemplateList searchInput={searchInput ?? ""} />
+      </Suspense>
+    </div>
   );
 };
 

@@ -23,7 +23,8 @@ export async function POST(req: Request) {
       },
     });
 
-    revalidatePath("/");
+    revalidatePath("/dashboard/usage");
+    revalidatePath("/dashboard/history");
 
     return NextResponse.json(createNewDoc, { status: 200 });
   } catch (error) {

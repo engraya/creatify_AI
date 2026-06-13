@@ -7,46 +7,47 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default async function HeroLanding() {
   return (
-    <section className="space-y-6 py-12 sm:py-20 lg:py-20">
-      <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
-        <Link
-          href="#"
-          className={cn(
-            buttonVariants({ variant: "outline", size: "sm", rounded: "full" }),
-            "px-4",
-          )}
-          target="_blank"
-        >
-          <span className="mr-3">🎉</span>
-          <span className="hidden md:flex">Trusted by 10,000+ users worldwide&nbsp;</span> ,
-          Rated 5 Stars by Content Creators
-        </Link>
+    <section className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
+      {/* Background decorations */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        {/* Dot grid */}
+        <div className="hero-dot-grid absolute inset-0 opacity-40 dark:opacity-20" />
+        {/* Primary glow — top center */}
+        <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-3xl dark:bg-primary/8" />
+        {/* Accent glow — bottom right */}
+        <div className="absolute -bottom-20 right-0 h-[400px] w-[500px] rounded-full bg-accent/15 blur-3xl dark:bg-accent/10" />
+        {/* Secondary accent — top left */}
+        <div className="absolute -left-20 top-1/4 h-[300px] w-[400px] rounded-full bg-primary/8 blur-3xl dark:bg-primary/5" />
+      </div>
+
+      <div className="container flex max-w-5xl flex-col items-center gap-6 text-center">
+        {/* Animated badge */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm dark:border-primary/20 dark:bg-primary/10">
+          <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+          AI-Powered Social Media Content Generation
+        </div>
 
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
-        Effortlessly Create Stunning Content with{" "}
-          <span className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text font-extrabold text-transparent">
-            Creatify_AI
+          Effortlessly Create Stunning Content with{" "}
+          <span className="brand-gradient-text font-extrabold">
+            {siteConfig.name}
           </span>
         </h1>
 
-        <p
-          className="max-w-2xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
-          style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
-        >
-          Say goodbye to writer&lsquo;s block and hello to creativity. Creatify_AI empowers businesses, marketers, and creators with high-quality, SEO-friendly content in seconds
+        <p className="max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-xl sm:leading-8">
+          Say goodbye to writer&apos;s block. Creatify_AI generates
+          platform-perfect content for Facebook, Instagram, TikTok, LinkedIn,
+          YouTube, and Twitter in seconds.
         </p>
 
-        <div
-          className="flex justify-center space-x-2 md:space-x-4"
-          style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
-        >
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
           <SignedIn>
             <Link
               href="/dashboard"
               prefetch={true}
               className={cn(
                 buttonVariants({ size: "lg", rounded: "full" }),
-                "gap-2",
+                "gap-2 shadow-md shadow-primary/20",
               )}
             >
               <span>Go to Dashboard</span>
@@ -59,10 +60,10 @@ export default async function HeroLanding() {
               prefetch={true}
               className={cn(
                 buttonVariants({ size: "lg", rounded: "full" }),
-                "gap-2",
+                "gap-2 shadow-md shadow-primary/20",
               )}
             >
-              <span>Get Started</span>
+              <span>Get Started Free</span>
               <Icons.arrowRight className="size-4" />
             </Link>
           </SignedOut>
@@ -77,15 +78,27 @@ export default async function HeroLanding() {
                 size: "lg",
                 rounded: "full",
               }),
-              "px-5",
+              "gap-2 px-5 backdrop-blur-sm",
             )}
           >
-            <Icons.gitHub className="mr-2 size-4" />
+            <Icons.gitHub className="size-4" />
             <p>
-              <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
-              {/* <span className="font-semibold">{nFormatter(stars)}</span> */}
+              <span className="hidden sm:inline-block">Star on</span> GitHub
             </p>
           </Link>
+        </div>
+
+        {/* Social proof */}
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <span className="text-yellow-500">★</span> 4.9/5 from 200+ reviews
+          </span>
+          <span className="hidden text-border sm:block">•</span>
+          <span className="hidden sm:block">10,000+ creators</span>
+          <span className="hidden text-border sm:block">•</span>
+          <span className="hidden sm:block">6 platform templates</span>
+          <span className="hidden text-border sm:block">•</span>
+          <span className="hidden sm:block">Free to start</span>
         </div>
       </div>
     </section>

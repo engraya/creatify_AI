@@ -1,44 +1,77 @@
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/shared/icons"
-import { SignUp } from '@clerk/nextjs'
+import { Metadata } from "next";
 import Image from "next/image";
+import { SignUp } from "@clerk/nextjs";
 import { logoIcon } from "@/public/_static";
-export const metadata = {
-  title: "Create an account",
-  description: "Create an account to get started.",
-}
+import { Check } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Sign Up — Creatify AI",
+  description: "Create your free Creatify AI account",
+};
+
+const platforms = [
+  "Facebook post descriptions",
+  "YouTube video ideas",
+  "Instagram hashtags",
+  "TikTok hashtags",
+  "LinkedIn posts",
+  "Twitter / X posts",
+];
 
 export default function SignUpPage() {
   return (
-    <div className="container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/sign-in"
-        className={cn(
-          buttonVariants({ variant: "ghost" }),
-          "absolute right-4 top-4 md:right-8 md:top-8"
-        )}
-      >
-        Login
-      </Link>
-      <div className="hidden h-full bg-muted lg:block" />
-      <div className="lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <div  className="mx-auto mt-6 flex items-center justify-center" >
-            <Image src={logoIcon} height={40} width={40} alt="logo"/>
-            </div>
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Create an account
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Enter your email below to create your account
+    <div className="grid lg:grid-cols-2 min-h-screen">
+      {/* Left brand panel — hidden on mobile */}
+      <div className="hidden lg:flex flex-col justify-between p-12 brand-gradient text-white">
+        <div className="flex items-center gap-2.5">
+          <Image
+            src={logoIcon}
+            height={36}
+            width={36}
+            alt="Creatify AI"
+            className="rounded-lg"
+          />
+          <span className="font-urban text-xl font-extrabold">Creatify_AI</span>
+        </div>
+
+        <div className="space-y-2">
+          <blockquote className="mb-8">
+            <p className="text-lg font-medium leading-relaxed">
+              &ldquo;Start generating platform-perfect social media content in
+              under 60 seconds. Free to try.&rdquo;
             </p>
+          </blockquote>
+          {platforms.map((p) => (
+            <div key={p} className="flex items-center gap-2.5 text-sm">
+              <div className="size-5 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <Check className="size-3" />
+              </div>
+              {p}
+            </div>
+          ))}
+        </div>
+
+        <p className="text-sm text-white/60">
+          © {new Date().getFullYear()} Creatify AI. All rights reserved.
+        </p>
+      </div>
+
+      {/* Right: Clerk form */}
+      <div className="flex items-center justify-center p-8 bg-background">
+        <div className="w-full max-w-sm space-y-6">
+          {/* Mobile logo */}
+          <div className="lg:hidden flex justify-center">
+            <Image
+              src={logoIcon}
+              height={40}
+              width={40}
+              alt="Creatify AI"
+              className="rounded-xl"
+            />
           </div>
           <SignUp />
         </div>
       </div>
     </div>
-  )
+  );
 }

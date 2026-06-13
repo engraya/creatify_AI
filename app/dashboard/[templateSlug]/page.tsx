@@ -3,96 +3,185 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { contentTemplates } from "@/lib/content-template";
-import { Loader } from "lucide-react";
+import { Loader, AlertCircle, ArrowLeft, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Editor } from "./_components/editor";
-import { chatSession } from "@/lib/gemini-ai";
-import axios from "axios";
+import { generateContentAction } from "@/actions/generate-content-action";
 import Link from "next/link";
-import { createContentAction } from "@/actions/save-content-action";
+import Image from "next/image";
 
-interface templateSlugProps {
-  templateSlug: string;
+interface PageProps {
+  params: { templateSlug: string };
 }
 
-const TemplatePage = ({ params }: { params: templateSlugProps }) => {
-  const [isLoading, setisLoading] = useState(false);
-  const [aiOutput, setAIOutput] = useState<string>("");
+const TemplatePage = ({ params }: PageProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [aiOutput, setAiOutput] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [charCount, setCharCount] = useState(0);
 
   const selectedTemplate = contentTemplates.find(
-    (item) => item.slug === params.templateSlug
+    (item) => item.slug === params.templateSlug,
   );
 
-  const generateAIContent = async (formData: FormData) => {
-    setisLoading(true);
-    try {
-      let dataSet = {
-        title: formData.get("title"),
-        description: formData.get("description"),
-      };
-
-      const selectedPrompt = selectedTemplate?.aiPrompt;
-      const finalAIPrompt = JSON.stringify(dataSet) + ", " + selectedPrompt;
-
-      const result = await chatSession.sendMessage(finalAIPrompt);
-      setAIOutput(result?.response?.text());
-      console.log("Response from GEMINI", result)
-
-      const response = await createContentAction({
-        title: dataSet.title,
-        description: result?.response?.text(),
-        templateUsed: selectedTemplate?.name,
-      });
-      console.log("response: " + response);
-    } catch (error) {
-      console.log("Generating Content Error",error);
-      setisLoading(false);
-    }
-  };
   const onSubmit = async (formData: FormData) => {
-    generateAIContent(formData);
+    setIsLoading(true);
+    setError("");
+    setAiOutput("");
+
+    const niche = (formData.get("niche") as string)?.trim();
+    const outline = (formData.get("outline") as string)?.trim();
+
+    if (!niche) {
+      setError("Please fill in the required field.");
+      setIsLoading(false);
+      return;
+    }
+
+    const result = await generateContentAction({
+      templateSlug: params.templateSlug,
+      niche,
+      outline: outline || undefined,
+    });
+
+    if (result.success) {
+      setAiOutput(result.content);
+    } else {
+      setError(result.error);
+    }
+
+    setIsLoading(false);
   };
+
+  if (!selectedTemplate) {
+    return (
+      <div className="p-5 text-center">
+        <p className="text-muted-foreground">Template not found.</p>
+        <Link
+          href="/dashboard"
+          className="text-primary underline text-sm mt-2 inline-block"
+        >
+          Go back to dashboard
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-5 py-2">
-      <Link href="/dashboard">
-      <div className="mt-3 w-10 cursor-pointer rounded-lg bg-slate-300 p-2">
-      <svg className="size-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-            <path fillRule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-        </svg>
+    <div className="p-5">
+      {/* Page header */}
+      <div className="flex items-center gap-3 mb-6">
+        <Link href="/dashboard">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-9 rounded-xl shrink-0"
+            aria-label="Back to dashboard"
+          >
+            <ArrowLeft className="size-4" />
+          </Button>
+        </Link>
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="size-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+            <Image
+              src={selectedTemplate.icon}
+              width={20}
+              height={20}
+              alt={selectedTemplate.name}
+              className="object-contain"
+            />
+          </div>
+          <div className="min-w-0">
+            <h1 className="text-sm font-semibold text-foreground truncate">
+              {selectedTemplate.name}
+            </h1>
+            <p className="text-xs text-muted-foreground truncate">
+              {selectedTemplate.desc}
+            </p>
+          </div>
+        </div>
       </div>
-      </Link>
-      <div className="mt-5 rounded bg-white px-4 py-6">
-        <h2 className="font-medium">{selectedTemplate?.name}</h2>
-      </div>
-      <form action={onSubmit}>
-        <div className="mt-3 flex flex-col gap-4 bg-white p-5">
-          {selectedTemplate?.form?.map((form) => (
-            <div key={selectedTemplate.id}>
-              <label>{form.label}</label>
-              {form.field === "input" ? (
-                <div className="mt-3">
-                  <Input name="title"></Input>
+
+      {/* Two-column grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+        {/* LEFT: Form */}
+        <Card className="rounded-2xl border-border shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-semibold">Configure</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form action={onSubmit} className="space-y-4">
+              {selectedTemplate.form.map((field) => (
+                <div key={field.name} className="space-y-1.5">
+                  <Label
+                    htmlFor={field.name}
+                    className="text-xs font-medium text-foreground"
+                  >
+                    {field.label}
+                    {field.required && (
+                      <span className="ml-1 text-destructive">*</span>
+                    )}
+                  </Label>
+                  {field.field === "input" ? (
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      placeholder={`Enter ${field.label.toLowerCase()}`}
+                      required={field.required}
+                      className="rounded-xl"
+                    />
+                  ) : (
+                    <div className="space-y-1">
+                      <Textarea
+                        id={field.name}
+                        name={field.name}
+                        placeholder={`Enter ${field.label.toLowerCase()}`}
+                        rows={4}
+                        maxLength={500}
+                        className="resize-none rounded-xl text-sm"
+                        onChange={(e) => setCharCount(e.target.value.length)}
+                      />
+                      <p className="text-right text-[11px] text-muted-foreground">
+                        {charCount}/500
+                      </p>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="mt-3">
-                  <Textarea name="description" />
+              ))}
+
+              {error && (
+                <div className="flex items-center gap-2 rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                  <AlertCircle className="size-4 shrink-0" />
+                  {error}
                 </div>
               )}
-            </div>
-          ))}
-        </div>
-        <Button className="mt-5" type="submit">
-          {isLoading ? (
-            <Loader className="animate-spin"></Loader>
-          ) : (
-            "Generate"
-          )}
-        </Button>
-      </form>
-      <div className="my-10">
-        <Editor value={isLoading ? "Generating Content, Please wait a moment!!!!!🤸🤸🤸🤸🤸🤸🤸..., if the loading persist, kindly go to your Recent contents History to see the result!" : aiOutput} />
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-10 rounded-xl brand-gradient text-white font-semibold hover:opacity-90"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader className="mr-2 size-4 animate-spin" />
+                    Generating…
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="mr-2 size-4" />
+                    Generate Content
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        {/* RIGHT: Output */}
+        <Editor value={aiOutput} isLoading={isLoading} />
       </div>
     </div>
   );

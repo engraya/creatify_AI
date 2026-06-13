@@ -1,66 +1,54 @@
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table";
-  import { db } from "@/lib/db";
-  import { format } from "date-fns";
-  import { currentUser } from "@clerk/nextjs/server";
-  
-  const History = async () => {
+import { db } from "@/lib/db";
+import { currentUser } from "@clerk/nextjs/server";
+import { History, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/shared/empty-state";
+import { HistoryTableClient } from "./_components/history-table-client";
 
-    const user = await currentUser();
-    const userId  = user?.id
-  
-    const userHistory = await db.aIOutput.findMany({
-      where: {
-        userId: userId as string,
-      },
-    });
-  
-    return (
-      <div className="mx-5 py-2">
-        <div className="mt-5 rounded bg-white px-4 py-6">
-          <h1 className="flex items-center justify-center bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-2xl font-black text-transparent">
-          Recent Contents History
-          </h1>
-        </div>
-        <div className="mt-5 rounded bg-white px-4 py-6">
-          <Table>
-            <TableCaption>List of your content output history.</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Template</TableHead>
-                <TableHead className="w-[250px]">Title</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead className="text-right">Timestamps</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {userHistory && userHistory.length > 0
-                ? userHistory.map((history) => (
-                    <TableRow key={history.id}>
-                      <TableCell>{history.templateUsed}</TableCell>
-                      <TableCell className="w-[250px]">{history.title}</TableCell>
-                      <TableCell className="whitespace-pre-wrap">
-                        {history.description}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {format(history.createdAt, "MM/dd/yyyy")}
-                      </TableCell>
-                    </TableRow>
-                  ))
-                : null}
-            </TableBody>
-          </Table>
-        </div>
+const HistoryPage = async () => {
+  const user = await currentUser();
+  if (!user?.id) return null;
+
+  const userHistory = await db.aIOutput.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return (
+    <div className="p-5">
+      <div className="mb-6">
+        <h1 className="text-xl font-semibold text-foreground">
+          Content History
+        </h1>
+        <p className="text-sm text-muted-foreground mt-0.5">
+          {userHistory.length} generation
+          {userHistory.length !== 1 ? "s" : ""} total
+        </p>
       </div>
-    );
-  };
-  
-  export default History;
+
+      <Card className="rounded-2xl border-border shadow-sm overflow-hidden">
+        {userHistory.length === 0 ? (
+          <EmptyState
+            icon={<History className="size-6 text-muted-foreground" />}
+            title="No content yet"
+            description="Generate content using any template and it will appear here."
+            action={
+              <Link href="/dashboard">
+                <Button size="sm" className="rounded-xl">
+                  <Sparkles className="size-3.5 mr-1.5" />
+                  Try a template
+                </Button>
+              </Link>
+            }
+          />
+        ) : (
+          <HistoryTableClient initialData={userHistory} />
+        )}
+      </Card>
+    </div>
+  );
+};
+
+export default HistoryPage;

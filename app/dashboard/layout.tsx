@@ -1,31 +1,46 @@
-"use client";
-
 import React from "react";
+import { currentUser } from "@clerk/nextjs/server";
+import { db } from "@/lib/db";
 import { Sidebar } from "./_components/sidebar";
-import { useState } from "react"
-import DashboardHeader from "./_components/DashboardHeader";
+import { MobileSidebarSheet } from "./_components/mobile-sidebar-sheet";
 
-const DashboardLayout = ({
+const DashboardLayout = async ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
+  const user = await currentUser();
 
-  const [showSideBar, setShowSideBar] = useState(false)
+  let availableCredit = 10000;
+  let totalUsage = 0;
 
+  if (user?.id) {
+    const [userAIOutputs, userCredit] = await Promise.all([
+      db.aIOutput.findMany({ where: { userId: user.id } }),
+      db.user.findUnique({ where: { userId: user.id } }),
+    ]);
+    totalUsage = userAIOutputs.reduce(
+      (sum, o) => sum + (o.description?.length ?? 0),
+      0,
+    );
+    availableCredit = userCredit ? Number(userCredit.totalCredit) : 10000;
+  }
+
+  const creditData = { availableCredit, totalUsage };
 
   return (
-    <div className="flex min-h-screen">
-    <Sidebar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-    <div className="relative w-full">
-    <div
-      className={`${
-        showSideBar &&
-        "bg-opacity/30 absolute z-40 size-full"
-      }`}
-      onClick={() => setShowSideBar(false)}
-        ></div>
-      <DashboardHeader setShowSideBar={setShowSideBar} showSideBar={showSideBar}/>
-      <div className="mt-12 h-fit bg-gray-50 pb-5 md:ml-64 md:mt-0">{children}</div>
-    </div>
+    <div className="flex min-h-screen bg-background">
+      {/* Desktop sidebar — always visible on lg+ */}
+      <aside className="hidden lg:flex">
+        <Sidebar creditData={creditData} />
+      </aside>
+
+      {/* Main content area */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Mobile header + Sheet drawer */}
+        <MobileSidebarSheet creditData={creditData} />
+
+        {/* Page content */}
+        <main className="flex-1 overflow-auto">{children}</main>
+      </div>
     </div>
   );
 };

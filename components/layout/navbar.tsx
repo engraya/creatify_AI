@@ -15,6 +15,7 @@ import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import Image from "next/image";
 import { logoIcon } from "@/public/_static";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 
 
@@ -50,11 +51,8 @@ export function NavBar({ scroll = false }: NavBarProps) {
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-1.5">
            <Image src={logoIcon} height={40} width={40} alt="logo"/>
-            <span className="font-urban text-xl font-extrabold">
-            <h1
-              className="bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 bg-clip-text text-xl font-extrabold text-transparent">
-                {siteConfig.name}
-            </h1>
+            <span className="font-urban text-xl font-extrabold brand-gradient-text">
+              {siteConfig.name}
             </span>
           </Link>
 
@@ -82,16 +80,17 @@ export function NavBar({ scroll = false }: NavBarProps) {
 
         <div className="flex items-center space-x-3">
             <div className="hidden flex-1 items-center space-x-4 sm:justify-end lg:flex">
-              
-               <div className="flex space-x-4">
+               <div className="flex items-center space-x-1">
                 <Link
                   href="https://github.com/engraya/creatify_AI"
                   target="_blank"
                   rel="noreferrer"
+                  className="flex items-center justify-center rounded-full p-2 text-foreground/60 hover:text-foreground transition-colors"
                 >
-                  <Icons.gitHub className="size-7" />
+                  <Icons.gitHub className="size-5" />
                   <span className="sr-only">GitHub</span>
                 </Link>
+                <ThemeToggle />
               </div>
             </div>
    

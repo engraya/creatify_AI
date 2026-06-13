@@ -54,11 +54,39 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        brand: {
+          50:  "hsl(240 100% 98%)",
+          100: "hsl(239 100% 95%)",
+          200: "hsl(240 96% 89%)",
+          300: "hsl(241 90% 80%)",
+          400: "hsl(243 85% 70%)",
+          500: "hsl(245 80% 61%)",
+          600: "hsl(247 75% 52%)",
+          700: "hsl(249 72% 44%)",
+          800: "hsl(250 68% 36%)",
+          900: "hsl(251 66% 28%)",
+        },
+      },
+      boxShadow: {
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm:  "calc(var(--radius) - 4px)",
+        md:  "calc(var(--radius) - 2px)",
+        lg:  "var(--radius)",
+        xl:  "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "calc(var(--radius) + 14px)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -75,68 +103,39 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        // Fade up and down
         "fade-up": {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(10px)",
-          },
-          "80%": {
-            opacity: "0.7",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0px)",
-          },
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "80%": { opacity: "0.7" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
         },
         "fade-down": {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(-10px)",
-          },
-          "80%": {
-            opacity: "0.6",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0px)",
-          },
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "80%": { opacity: "0.6" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
         },
-        // Fade in and out
         "fade-in": {
-          "0%": {
-            opacity: "0",
-          },
-          "50%": {
-            opacity: "0.6",
-          },
-          "100%": {
-            opacity: "1",
-          },
+          "0%": { opacity: "0" },
+          "50%": { opacity: "0.6" },
+          "100%": { opacity: "1" },
         },
         "fade-out": {
-          "0%": {
-            opacity: "0",
-          },
-          "50%": {
-            opacity: "0.6",
-          },
-          "100%": {
-            opacity: "1",
-          },
+          "0%": { opacity: "0" },
+          "50%": { opacity: "0.6" },
+          "100%": { opacity: "1" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-
-        // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
-
-        // Fade in and out
         "fade-in": "fade-in 0.4s",
         "fade-out": "fade-out 0.4s",
+        shimmer: "shimmer 1.5s ease-in-out infinite",
       },
     },
   },

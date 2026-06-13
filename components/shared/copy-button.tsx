@@ -1,46 +1,39 @@
 "use client";
 
-import React from "react";
-
+import { useState } from "react";
+import { Copy, Check } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { Icons } from "./icons";
-
-interface CopyButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface CopyButtonProps {
   value: string;
+  className?: string;
 }
 
-export function CopyButton({ value, className, ...props }: CopyButtonProps) {
-  const [hasCopied, setHasCopied] = React.useState(false);
+export function CopyButton({ value, className }: CopyButtonProps) {
+  const [copied, setCopied] = useState(false);
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setHasCopied(false);
-    }, 2000);
-  }, [hasCopied]);
-
-  const handleCopyValue = (value: string) => {
-    navigator.clipboard.writeText(value);
-    setHasCopied(true);
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    toast.success("Copied to clipboard!");
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <Button
-      size="sm"
       variant="ghost"
-      className={cn(
-        "z-10 size-[30px] border border-white/25 bg-zinc-900 p-1.5 text-primary-foreground hover:text-foreground dark:text-foreground",
-        className,
-      )}
-      onClick={() => handleCopyValue(value)}
-      {...props}
+      size="icon"
+      className={cn("size-8 rounded-lg hover:bg-muted", className)}
+      onClick={handleCopy}
+      title="Copy to clipboard"
+      type="button"
     >
-      <span className="sr-only">Copy</span>
-      {hasCopied ? (
-        <Icons.check className="size-4" />
+      {copied ? (
+        <Check className="size-3.5 text-green-500" />
       ) : (
-        <Icons.copy className="size-4" />
+        <Copy className="size-3.5 text-muted-foreground" />
       )}
     </Button>
   );
