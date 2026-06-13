@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -57,16 +58,18 @@ export function HistoryTableClient({
                 </Badge>
               </TableCell>
               <TableCell>
-                <p className="max-w-[200px] truncate text-sm font-medium text-foreground">
-                  {item.title ?? "—"}
-                </p>
-                <p className="mt-0.5 max-w-[300px] truncate text-xs text-muted-foreground">
-                  {item.description
-                    ? item.description.length > 120
-                      ? `${item.description.slice(0, 120)}…`
-                      : item.description
-                    : "—"}
-                </p>
+                <Link href={`/dashboard/history/${item.id}`} className="group">
+                  <p className="max-w-[200px] truncate text-sm font-medium text-foreground group-hover:text-primary">
+                    {item.title ?? "—"}
+                  </p>
+                  <p className="mt-0.5 max-w-[300px] truncate text-xs text-muted-foreground">
+                    {item.description
+                      ? item.description.length > 120
+                        ? `${item.description.slice(0, 120)}…`
+                        : item.description
+                      : "—"}
+                  </p>
+                </Link>
               </TableCell>
               <TableCell className="text-xs text-muted-foreground">
                 {item.description?.length.toLocaleString() ?? 0}
