@@ -54,7 +54,8 @@ export async function generateContentAction(
     const session = createChatSession();
     const result = await session.sendMessage(prompt);
     content = result.response.text();
-  } catch {
+  } catch (err) {
+    console.error("[Gemini] generation failed:", err);
     return { success: false, error: "AI service unavailable. Please try again." };
   }
 
