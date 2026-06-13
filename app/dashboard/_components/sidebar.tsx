@@ -34,9 +34,9 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
   );
 
   return (
-    <div className="flex h-screen w-64 shrink-0 flex-col bg-card border-r border-border">
+    <div className="flex h-screen w-64 shrink-0 flex-col border-r border-border bg-card">
       {/* Logo */}
-      <div className="h-16 flex items-center gap-2.5 px-5 border-b border-border shrink-0">
+      <div className="flex h-16 shrink-0 items-center gap-2.5 border-b border-border px-5">
         <Link
           href="/"
           onClick={onNavClick}
@@ -49,14 +49,14 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
             alt="Creatify logo"
             className="rounded-lg"
           />
-          <span className="font-urban text-lg font-extrabold brand-gradient-text">
+          <span className="brand-gradient-text font-urban text-lg font-extrabold">
             {siteConfig.name}
           </span>
         </Link>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 flex flex-col gap-1 px-3 py-4 overflow-y-auto">
+      <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4">
         {menuList.map((menu) => {
           const Icon = menu.icon;
           const isActive = path === menu.path;
@@ -66,9 +66,9 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
               key={menu.name}
               onClick={onNavClick}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-primary/10 text-primary font-semibold border border-primary/20"
+                  ? "border border-primary/20 bg-primary/10 font-semibold text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
@@ -80,16 +80,16 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
       </nav>
 
       {/* Credit meter */}
-      <div className="px-4 py-3 border-t border-border">
-        <div className="flex items-center justify-between mb-1.5">
+      <div className="border-t border-border px-4 py-3">
+        <div className="mb-1.5 flex items-center justify-between">
           <span className="text-xs font-medium text-muted-foreground">
             Credits
           </span>
-          <span className="text-xs font-mono text-foreground">
+          <span className="font-mono text-xs text-foreground">
             {remaining.toLocaleString()} left
           </span>
         </div>
-        <div className="relative h-1.5 w-full rounded-full bg-muted overflow-hidden">
+        <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
           <div
             className={cn(
               "h-full rounded-full transition-all duration-500",
@@ -104,7 +104,7 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
         </p>
         {percentUsed > 80 && (
           <Link href="/dashboard/upgrade" onClick={onNavClick}>
-            <div className="mt-2 w-full text-xs h-7 rounded-lg border border-warning/50 text-warning hover:bg-warning/10 transition-colors px-2 flex items-center justify-center gap-1 cursor-pointer">
+            <div className="mt-2 flex h-7 w-full cursor-pointer items-center justify-center gap-1 rounded-lg border border-warning/50 px-2 text-xs text-warning transition-colors hover:bg-warning/10">
               <Zap className="size-3" />
               Upgrade
             </div>
@@ -113,7 +113,7 @@ export const Sidebar = ({ creditData, onNavClick }: Props) => {
       </div>
 
       {/* User */}
-      <div className="px-4 py-3 border-t border-border flex items-center justify-between">
+      <div className="flex items-center justify-between border-t border-border px-4 py-3">
         <UserButton />
         <ThemeToggle />
       </div>

@@ -6,7 +6,7 @@ export function TemplateGridSkeleton() {
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
-          className="rounded-2xl border border-border bg-card p-5 space-y-3"
+          className="space-y-3 rounded-2xl border border-border bg-card p-5"
         >
           <div className="flex items-start justify-between">
             <Skeleton className="size-10 rounded-xl" />

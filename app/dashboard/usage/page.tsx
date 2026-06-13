@@ -39,17 +39,17 @@ function StatCard({
       <CardContent className="pt-5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               {title}
             </p>
-            <p className="text-2xl font-bold text-foreground mt-1">{value}</p>
+            <p className="mt-1 text-2xl font-bold text-foreground">{value}</p>
             {trend && (
-              <p className="text-xs text-muted-foreground mt-0.5">{trend}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{trend}</p>
             )}
           </div>
           <div
             className={cn(
-              "size-8 rounded-lg flex items-center justify-center",
+              "flex size-8 items-center justify-center rounded-lg",
               variant === "warning"
                 ? "bg-warning/20 text-warning"
                 : "bg-primary/10 text-primary",
@@ -76,27 +76,27 @@ const UsagePage = async () => {
     (sum, o) => sum + (o.description?.length ?? 0),
     0,
   );
-  const availableCredit = userCredit ? Number(userCredit.totalCredit) : 10000;
-  const remaining = Math.max(availableCredit - totalUsage, 0);
+  const remaining = userCredit ? Number(userCredit.totalCredit) : 10000;
+  const totalCreditsEver = totalUsage + remaining;
   const percentUsed = Math.min(
-    (totalUsage / Math.max(availableCredit, 1)) * 100,
+    (totalUsage / Math.max(totalCreditsEver, 1)) * 100,
     100,
   );
 
   return (
-    <div className="p-5 space-y-5">
+    <div className="space-y-5 p-5">
       <div>
         <h1 className="text-xl font-semibold text-foreground">Credit Usage</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <p className="mt-0.5 text-sm text-muted-foreground">
           Your AI generation activity and credit balance
         </p>
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard
           title="Total Credits"
-          value={availableCredit.toLocaleString()}
+          value={totalCreditsEver.toLocaleString()}
           icon={<CreditCard className="size-4" />}
           trend="lifetime allocation"
         />
@@ -127,10 +127,10 @@ const UsagePage = async () => {
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Used</span>
               <span className="font-medium">
-                {totalUsage.toLocaleString()} / {availableCredit.toLocaleString()}
+                {totalUsage.toLocaleString()} / {totalCreditsEver.toLocaleString()}
               </span>
             </div>
-            <div className="relative h-3 w-full rounded-full bg-muted overflow-hidden">
+            <div className="relative h-3 w-full overflow-hidden rounded-full bg-muted">
               <div
                 className={cn(
                   "h-full rounded-full transition-all duration-700",
@@ -139,14 +139,14 @@ const UsagePage = async () => {
                 style={{ width: `${percentUsed}%` }}
               />
             </div>
-            <p className="text-xs text-muted-foreground text-right">
+            <p className="text-right text-xs text-muted-foreground">
               {percentUsed.toFixed(1)}% used
             </p>
           </div>
         </CardContent>
         {percentUsed > 70 && (
           <CardFooter className="border-t border-border pt-3">
-            <div className="flex items-center justify-between w-full">
+            <div className="flex w-full items-center justify-between">
               <p className="text-xs text-muted-foreground">
                 {percentUsed > 80
                   ? "Running low on credits"
@@ -158,7 +158,7 @@ const UsagePage = async () => {
                   variant="outline"
                   className="rounded-xl text-xs"
                 >
-                  <Zap className="size-3 mr-1" />
+                  <Zap className="mr-1 size-3" />
                   Get More Credits
                 </Button>
               </Link>

@@ -26,15 +26,15 @@ export const footerLinks: SidebarNavItem[] = [
   {
     title: "Product",
     items: [
-      { title: "Features", href: "#" },
-      { title: "Pricing", href: "#" }
+      { title: "Features", href: "/features" },
+      { title: "Pricing", href: "/pricing" },
     ],
   },
   {
     title: "Support",
     items: [
-      { title: "Help Center", href: "#" },
-      { title: "Contact Us", href: "#" }
+      { title: "Help Center", href: "/about" },
+      { title: "Contact Us", href: "mailto:engrahmadaya@gmail.com" },
     ],
   },
 ];

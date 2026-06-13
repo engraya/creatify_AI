@@ -26,14 +26,14 @@ export function MobileSidebarSheet({
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 flex h-14 items-center gap-3 px-4 bg-background/80 backdrop-blur-md border-b border-border lg:hidden">
+    <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-md lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" className="size-9 rounded-xl">
             <Menu className="size-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-64">
+        <SheetContent side="left" className="w-64 p-0">
           <Sidebar creditData={creditData} onNavClick={() => setOpen(false)} />
         </SheetContent>
       </Sheet>
@@ -46,7 +46,7 @@ export function MobileSidebarSheet({
           alt="Creatify"
           className="rounded-lg"
         />
-        <span className="font-urban text-base font-extrabold brand-gradient-text">
+        <span className="brand-gradient-text font-urban text-base font-extrabold">
           {siteConfig.name}
         </span>
       </Link>

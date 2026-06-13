@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Sparkles, Share2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
@@ -8,7 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/shared/copy-button";
+import { useShareModal } from "@/components/modals/share-modal";
 
 interface EditorProps {
   value: string;
@@ -16,10 +18,12 @@ interface EditorProps {
 }
 
 export const Editor = ({ value, isLoading }: EditorProps) => {
+  const { setShowShareModal, ShareModal } = useShareModal({ content: value });
+
   if (isLoading) {
     return (
       <Card className="rounded-2xl border-border">
-        <CardHeader className="pb-3 flex-row items-center justify-between">
+        <CardHeader className="flex-row items-center justify-between pb-3">
           <CardTitle className="text-sm font-semibold">
             Generated Output
           </CardTitle>
@@ -34,7 +38,7 @@ export const Editor = ({ value, isLoading }: EditorProps) => {
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-2/3" />
           </div>
-          <p className="text-xs text-muted-foreground mt-4 text-center animate-pulse">
+          <p className="mt-4 animate-pulse text-center text-xs text-muted-foreground">
             AI is generating your content…
           </p>
         </CardContent>
@@ -44,15 +48,15 @@ export const Editor = ({ value, isLoading }: EditorProps) => {
 
   if (!value) {
     return (
-      <Card className="rounded-2xl border-border border-dashed">
+      <Card className="rounded-2xl border-dashed border-border">
         <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-          <div className="size-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
+          <div className="mb-3 flex size-12 items-center justify-center rounded-2xl bg-muted">
             <Sparkles className="size-5 text-muted-foreground" />
           </div>
           <p className="text-sm font-medium text-foreground">
             Ready to generate
           </p>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="mt-1 text-xs text-muted-foreground">
             Fill in the form and click Generate Content
           </p>
         </CardContent>
@@ -61,23 +65,36 @@ export const Editor = ({ value, isLoading }: EditorProps) => {
   }
 
   return (
-    <Card className="rounded-2xl border-border">
-      <CardHeader className="pb-3 flex-row items-center justify-between">
-        <CardTitle className="text-sm font-semibold">Generated Output</CardTitle>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] text-muted-foreground">
-            {value.length.toLocaleString()} chars
-          </span>
-          <CopyButton value={value} />
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="rounded-xl bg-muted/40 p-4 max-h-[480px] overflow-y-auto">
-          <pre className="whitespace-pre-wrap text-sm text-foreground font-sans leading-relaxed">
-            {value}
-          </pre>
-        </div>
-      </CardContent>
-    </Card>
+    <>
+      <ShareModal />
+      <Card className="rounded-2xl border-border">
+        <CardHeader className="flex-row items-center justify-between pb-3">
+          <CardTitle className="text-sm font-semibold">Generated Output</CardTitle>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] text-muted-foreground">
+              {value.length.toLocaleString()} chars
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 rounded-lg"
+              onClick={() => setShowShareModal(true)}
+              type="button"
+              title="Share content"
+            >
+              <Share2 className="size-3.5 text-muted-foreground" />
+            </Button>
+            <CopyButton value={value} />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="max-h-[480px] overflow-y-auto rounded-xl bg-muted/40 p-4">
+            <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-foreground">
+              {value}
+            </pre>
+          </div>
+        </CardContent>
+      </Card>
+    </>
   );
 };

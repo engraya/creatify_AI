@@ -1,15 +1,22 @@
 "use client";
 
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import UpgradeCard from "./_components/UpgradeCard";
 
 const UpgradePage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnClick = async () => {
-    const response = await axios.post("/api/upgrade/checkout");
-    router.push(response.data.url);
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/api/upgrade/checkout");
+      router.push(response.data.url);
+    } catch {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -18,13 +25,13 @@ const UpgradePage = () => {
         <h1 className="text-xl font-semibold text-foreground">
           Upgrade Credits
         </h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <p className="mt-0.5 text-sm text-muted-foreground">
           One-time purchase — no subscriptions, no recurring charges
         </p>
       </div>
 
       <div className="max-w-md">
-        <UpgradeCard handleOnClick={handleOnClick} />
+        <UpgradeCard handleOnClick={handleOnClick} isLoading={isLoading} />
       </div>
     </div>
   );

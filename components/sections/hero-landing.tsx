@@ -13,17 +13,17 @@ export default async function HeroLanding() {
         {/* Dot grid */}
         <div className="hero-dot-grid absolute inset-0 opacity-40 dark:opacity-20" />
         {/* Primary glow — top center */}
-        <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-3xl dark:bg-primary/8" />
+        <div className="dark:bg-primary/8 absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-3xl" />
         {/* Accent glow — bottom right */}
         <div className="absolute -bottom-20 right-0 h-[400px] w-[500px] rounded-full bg-accent/15 blur-3xl dark:bg-accent/10" />
         {/* Secondary accent — top left */}
-        <div className="absolute -left-20 top-1/4 h-[300px] w-[400px] rounded-full bg-primary/8 blur-3xl dark:bg-primary/5" />
+        <div className="bg-primary/8 absolute -left-20 top-1/4 h-[300px] w-[400px] rounded-full blur-3xl dark:bg-primary/5" />
       </div>
 
       <div className="container flex max-w-5xl flex-col items-center gap-6 text-center">
         {/* Animated badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm dark:border-primary/20 dark:bg-primary/10">
-          <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+        <div className="bg-primary/8 inline-flex items-center gap-2 rounded-full border border-primary/25 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm dark:border-primary/20 dark:bg-primary/10">
+          <span className="size-1.5 animate-pulse rounded-full bg-primary" />
           AI-Powered Social Media Content Generation
         </div>
 

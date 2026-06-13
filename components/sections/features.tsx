@@ -21,7 +21,7 @@ export default function Features() {
               const Icon = Icons[feature.icon || "nextjs"];
               return (
                 <div
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 md:p-8 hover:border-primary/40 hover:shadow-lg transition-all duration-300"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg md:p-8"
                   key={feature.title}
                 >
                   {/* Gradient glow blob */}
@@ -32,7 +32,7 @@ export default function Features() {
                   {/* Bottom accent line */}
                   <div
                     aria-hidden="true"
-                    className="absolute bottom-0 left-0 h-px w-0 brand-gradient opacity-0 transition-all duration-500 group-hover:w-full group-hover:opacity-100"
+                    className="brand-gradient absolute bottom-0 left-0 h-px w-0 opacity-0 transition-all duration-500 group-hover:w-full group-hover:opacity-100"
                   />
 
                   <div className="relative">
@@ -40,12 +40,12 @@ export default function Features() {
                       <div className="relative flex size-12 items-center justify-center rounded-2xl border border-border bg-background shadow-sm ring-1 ring-border/50 transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-md">
                         <Icon className="size-6" />
                       </div>
-                      <div className="flex items-center justify-center text-sm font-semibold text-foreground max-w-[140px] text-center">
+                      <div className="flex max-w-[140px] items-center justify-center text-center text-sm font-semibold text-foreground">
                         {feature.title}
                       </div>
                     </div>
 
-                    <p className="mt-6 pb-6 text-sm text-muted-foreground leading-relaxed">
+                    <p className="mt-6 pb-6 text-sm leading-relaxed text-muted-foreground">
                       {feature.description}
                     </p>
 
@@ -56,7 +56,7 @@ export default function Features() {
                         rounded="xl"
                         className="px-4 transition-colors group-hover:bg-primary/10 group-hover:text-primary"
                       >
-                        <Link href="/" className="flex items-center gap-2">
+                        <Link href="/features" className="flex items-center gap-2">
                           <span>Visit the site</span>
                           <Icons.arrowUpRight className="size-4" />
                         </Link>

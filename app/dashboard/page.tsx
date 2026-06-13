@@ -10,11 +10,11 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="px-5 pt-6 pb-2">
+      <div className="px-5 pb-2 pt-6">
         <h1 className="text-xl font-semibold text-foreground">
           Content Templates
         </h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <p className="mt-0.5 text-sm text-muted-foreground">
           Choose a template to generate social media content with AI
         </p>
       </div>

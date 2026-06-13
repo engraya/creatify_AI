@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check, Zap } from "lucide-react";
+import { Check, Loader2, Zap } from "lucide-react";
 
 const features = [
   "10,000 credits added to your account instantly",
@@ -17,21 +17,27 @@ const features = [
   "Instant activation after payment",
 ];
 
-function UpgradeCard({ handleOnClick }: { handleOnClick: () => void }) {
+function UpgradeCard({
+  handleOnClick,
+  isLoading,
+}: {
+  handleOnClick: () => void;
+  isLoading: boolean;
+}) {
   return (
-    <Card className="rounded-2xl border-primary/30 shadow-lg relative overflow-hidden">
+    <Card className="relative overflow-hidden rounded-2xl border-primary/30 shadow-lg">
       {/* Top accent bar */}
-      <div className="absolute top-0 inset-x-0 h-1 brand-gradient" />
+      <div className="brand-gradient absolute inset-x-0 top-0 h-1" />
 
       <CardHeader className="pt-6">
         <div className="flex items-start justify-between">
           <div>
-            <Badge className="bg-primary/10 text-primary border-primary/20 mb-2">
+            <Badge className="mb-2 border-primary/20 bg-primary/10 text-primary">
               One-Time Purchase
             </Badge>
             <CardTitle className="text-3xl font-bold">
               $10
-              <span className="text-sm font-normal text-muted-foreground ml-1.5">
+              <span className="ml-1.5 text-sm font-normal text-muted-foreground">
                 one-time
               </span>
             </CardTitle>
@@ -39,7 +45,7 @@ function UpgradeCard({ handleOnClick }: { handleOnClick: () => void }) {
               10,000 additional credits added instantly
             </CardDescription>
           </div>
-          <div className="size-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+          <div className="flex size-12 items-center justify-center rounded-2xl bg-primary/10">
             <Zap className="size-5 text-primary" />
           </div>
         </div>
@@ -48,7 +54,7 @@ function UpgradeCard({ handleOnClick }: { handleOnClick: () => void }) {
       <CardContent className="space-y-3">
         {features.map((text) => (
           <div key={text} className="flex items-center gap-2.5">
-            <div className="size-5 rounded-full bg-green-500/15 flex items-center justify-center shrink-0">
+            <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-green-500/15">
               <Check className="size-3 text-green-500" />
             </div>
             <span className="text-sm text-foreground">{text}</span>
@@ -59,12 +65,22 @@ function UpgradeCard({ handleOnClick }: { handleOnClick: () => void }) {
       <CardFooter className="flex flex-col gap-3 border-t border-border pt-4">
         <Button
           onClick={handleOnClick}
-          className="w-full h-11 rounded-xl brand-gradient text-white font-semibold hover:opacity-90"
+          disabled={isLoading}
+          className="brand-gradient h-11 w-full rounded-xl font-semibold text-white hover:opacity-90 disabled:opacity-70"
         >
-          <Zap className="size-4 mr-2" />
-          Purchase Credits — $10
+          {isLoading ? (
+            <>
+              <Loader2 className="mr-2 size-4 animate-spin" />
+              Processing…
+            </>
+          ) : (
+            <>
+              <Zap className="mr-2 size-4" />
+              Purchase Credits — $10
+            </>
+          )}
         </Button>
-        <p className="text-xs text-center text-muted-foreground">
+        <p className="text-center text-xs text-muted-foreground">
           Secured by Stripe. No subscription required.
         </p>
       </CardFooter>

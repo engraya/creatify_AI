@@ -14,14 +14,19 @@ const DashboardLayout = async ({
 
   if (user?.id) {
     const [userAIOutputs, userCredit] = await Promise.all([
-      db.aIOutput.findMany({ where: { userId: user.id } }),
+      db.aIOutput.findMany({ where: { userId: user.id }, select: { description: true } }),
       db.user.findUnique({ where: { userId: user.id } }),
     ]);
-    totalUsage = userAIOutputs.reduce(
+    // totalUsage = sum of all generated content lengths (credits spent)
+    const usedCredit = userAIOutputs.reduce(
       (sum, o) => sum + (o.description?.length ?? 0),
       0,
     );
-    availableCredit = userCredit ? Number(userCredit.totalCredit) : 10000;
+    // remainingCredit is the live balance already decremented on each generation
+    const remainingCredit = userCredit ? Number(userCredit.totalCredit) : 10000;
+    // availableCredit = remaining + used, so that sidebar's (available - used) = remaining
+    availableCredit = remainingCredit + usedCredit;
+    totalUsage = usedCredit;
   }
 
   const creditData = { availableCredit, totalUsage };
@@ -34,7 +39,7 @@ const DashboardLayout = async ({
       </aside>
 
       {/* Main content area */}
-      <div className="flex-1 min-w-0 flex flex-col">
+      <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile header + Sheet drawer */}
         <MobileSidebarSheet creditData={creditData} />
 

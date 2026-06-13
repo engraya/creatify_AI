@@ -20,9 +20,9 @@ const platforms = [
 
 export default function SignInPage() {
   return (
-    <div className="grid lg:grid-cols-2 min-h-screen">
+    <div className="grid min-h-screen lg:grid-cols-2">
       {/* Left brand panel — hidden on mobile */}
-      <div className="hidden lg:flex flex-col justify-between p-12 brand-gradient text-white">
+      <div className="brand-gradient hidden flex-col justify-between p-12 text-white lg:flex">
         <div className="flex items-center gap-2.5">
           <Image
             src={logoIcon}
@@ -43,7 +43,7 @@ export default function SignInPage() {
           </blockquote>
           {platforms.map((p) => (
             <div key={p} className="flex items-center gap-2.5 text-sm">
-              <div className="size-5 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+              <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-white/20">
                 <Check className="size-3" />
               </div>
               {p}
@@ -57,10 +57,10 @@ export default function SignInPage() {
       </div>
 
       {/* Right: Clerk form */}
-      <div className="flex items-center justify-center p-8 bg-background">
+      <div className="flex items-center justify-center bg-background p-8">
         <div className="w-full max-w-sm space-y-6">
           {/* Mobile logo */}
-          <div className="lg:hidden flex justify-center">
+          <div className="flex justify-center lg:hidden">
             <Image
               src={logoIcon}
               height={40}

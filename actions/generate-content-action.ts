@@ -76,6 +76,7 @@ export async function generateContentAction(
     }),
   ]);
 
+  revalidatePath("/dashboard", "layout");
   revalidatePath("/dashboard/usage");
   revalidatePath("/dashboard/history");
 

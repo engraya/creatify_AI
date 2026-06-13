@@ -51,7 +51,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-1.5">
            <Image src={logoIcon} height={40} width={40} alt="logo"/>
-            <span className="font-urban text-xl font-extrabold brand-gradient-text">
+            <span className="brand-gradient-text font-urban text-xl font-extrabold">
               {siteConfig.name}
             </span>
           </Link>
@@ -85,7 +85,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
                   href="https://github.com/engraya/creatify_AI"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center rounded-full p-2 text-foreground/60 hover:text-foreground transition-colors"
+                  className="flex items-center justify-center rounded-full p-2 text-foreground/60 transition-colors hover:text-foreground"
                 >
                   <Icons.gitHub className="size-5" />
                   <span className="sr-only">GitHub</span>

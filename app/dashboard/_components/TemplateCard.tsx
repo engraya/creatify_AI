@@ -13,9 +13,9 @@ type TemplateCardProps = {
 
 function TemplateCard({ name, icon, desc, category }: TemplateCardProps) {
   return (
-    <div className="group relative flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 cursor-pointer hover:border-primary/40 hover:shadow-md transition-all duration-200">
+    <div className="group relative flex cursor-pointer flex-col gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-200 hover:border-primary/40 hover:shadow-md">
       <div className="flex items-start justify-between">
-        <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
           <Image
             src={icon}
             width={22}
@@ -27,7 +27,7 @@ function TemplateCard({ name, icon, desc, category }: TemplateCardProps) {
         {category && (
           <Badge
             variant="secondary"
-            className="text-[11px] capitalize shrink-0"
+            className="shrink-0 text-[11px] capitalize"
           >
             {category}
           </Badge>
@@ -36,12 +36,12 @@ function TemplateCard({ name, icon, desc, category }: TemplateCardProps) {
 
       <div>
         <h3 className="text-sm font-semibold text-foreground">{name}</h3>
-        <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
+        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
           {desc}
         </p>
       </div>
 
-      <div className="mt-auto flex items-center gap-1.5 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="mt-auto flex items-center gap-1.5 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
         Generate <ArrowRight className="size-3" />
       </div>
     </div>

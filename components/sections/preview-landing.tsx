@@ -7,7 +7,7 @@ export default function PreviewLanding() {
     <div className="pb-6 sm:pb-16">
       <MaxWidthWrapper>
         {/* Outer glow ring */}
-        <div className="relative rounded-2xl p-px brand-gradient shadow-2xl shadow-primary/10">
+        <div className="brand-gradient relative rounded-2xl p-px shadow-2xl shadow-primary/10">
           <div className="rounded-2xl bg-muted/30 p-3 ring-1 ring-inset ring-white/10 backdrop-blur-sm dark:bg-background/60">
             {/* Browser chrome mock */}
             <div className="overflow-hidden rounded-xl border border-border bg-muted">

@@ -19,7 +19,7 @@ export default function Testimonials() {
                 {/* Subtle top accent on hover */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-4 right-4 top-0 h-px brand-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-60 rounded-full"
+                  className="brand-gradient absolute inset-x-4 top-0 h-px rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-60"
                 />
                 <div className="flex flex-col px-4 py-5 sm:p-6">
                   {/* Star rating */}
@@ -56,7 +56,7 @@ export default function Testimonials() {
                         </p>
                       </div>
                     </div>
-                    <q className="text-sm text-muted-foreground leading-relaxed">
+                    <q className="text-sm leading-relaxed text-muted-foreground">
                       {item.review}
                     </q>
                   </div>

@@ -28,10 +28,10 @@ export const CategoryItem = ({ name, value }: CategoryProps) => {
     <button
       onClick={handleOnClick}
       className={cn(
-        "inline-flex items-center rounded-full border text-xs font-medium px-3 py-1.5 transition-colors cursor-pointer select-none",
+        "inline-flex cursor-pointer select-none items-center rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
         isSelected
-          ? "bg-primary text-primary-foreground border-primary"
-          : "bg-background text-muted-foreground border-border hover:bg-muted hover:text-foreground",
+          ? "border-primary bg-primary text-primary-foreground"
+          : "border-border bg-background text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
       {name}

@@ -57,10 +57,10 @@ export function HistoryTableClient({
                 </Badge>
               </TableCell>
               <TableCell>
-                <p className="text-sm font-medium text-foreground truncate max-w-[200px]">
+                <p className="max-w-[200px] truncate text-sm font-medium text-foreground">
                   {item.title ?? "—"}
                 </p>
-                <p className="text-xs text-muted-foreground truncate max-w-[300px] mt-0.5">
+                <p className="mt-0.5 max-w-[300px] truncate text-xs text-muted-foreground">
                   {item.description
                     ? item.description.length > 120
                       ? `${item.description.slice(0, 120)}…`
@@ -78,6 +78,7 @@ export function HistoryTableClient({
                 <HistoryRowActions
                   id={item.id}
                   description={item.description ?? ""}
+                  title={item.title ?? undefined}
                 />
               </TableCell>
             </TableRow>
@@ -86,7 +87,7 @@ export function HistoryTableClient({
       </Table>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+        <div className="flex items-center justify-between border-t border-border px-4 py-3">
           <span className="text-xs text-muted-foreground">
             Showing {(page - 1) * ITEMS_PER_PAGE + 1}–
             {Math.min(page * ITEMS_PER_PAGE, initialData.length)} of{" "}
@@ -96,7 +97,7 @@ export function HistoryTableClient({
             <Button
               variant="outline"
               size="sm"
-              className="rounded-lg text-xs h-7"
+              className="h-7 rounded-lg text-xs"
               disabled={page === 1}
               onClick={() => setPage((p) => p - 1)}
             >
@@ -105,7 +106,7 @@ export function HistoryTableClient({
             <Button
               variant="outline"
               size="sm"
-              className="rounded-lg text-xs h-7"
+              className="h-7 rounded-lg text-xs"
               disabled={page === totalPages}
               onClick={() => setPage((p) => p + 1)}
             >

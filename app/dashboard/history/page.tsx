@@ -22,13 +22,13 @@ const HistoryPage = async () => {
         <h1 className="text-xl font-semibold text-foreground">
           Content History
         </h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <p className="mt-0.5 text-sm text-muted-foreground">
           {userHistory.length} generation
           {userHistory.length !== 1 ? "s" : ""} total
         </p>
       </div>
 
-      <Card className="rounded-2xl border-border shadow-sm overflow-hidden">
+      <Card className="overflow-hidden rounded-2xl border-border shadow-sm">
         {userHistory.length === 0 ? (
           <EmptyState
             icon={<History className="size-6 text-muted-foreground" />}
@@ -37,7 +37,7 @@ const HistoryPage = async () => {
             action={
               <Link href="/dashboard">
                 <Button size="sm" className="rounded-xl">
-                  <Sparkles className="size-3.5 mr-1.5" />
+                  <Sparkles className="mr-1.5 size-3.5" />
                   Try a template
                 </Button>
               </Link>
