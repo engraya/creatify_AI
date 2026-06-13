@@ -6,7 +6,8 @@ import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { contentTemplates } from "@/lib/content-template";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ContentDetailClient } from "./_components/content-detail-client";
 
 interface Props {
@@ -28,17 +29,16 @@ const ContentDetailPage = async ({ params }: Props) => {
   return (
     <div className="p-5">
       <div className="mb-6">
-        <Button
-          asChild
-          variant="ghost"
-          size="sm"
-          className="gap-1.5 rounded-xl text-muted-foreground"
+        <Link
+          href="/dashboard/history"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "gap-1.5 rounded-xl text-muted-foreground",
+          )}
         >
-          <Link href="/dashboard/history">
-            <ArrowLeft className="size-3.5" />
-            Back to History
-          </Link>
-        </Button>
+          <ArrowLeft className="size-3.5" />
+          Back to History
+        </Link>
       </div>
 
       <div className="mb-4">
